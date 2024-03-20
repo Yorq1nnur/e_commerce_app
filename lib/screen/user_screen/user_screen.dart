@@ -9,7 +9,9 @@ class UserScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.blueGrey,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.blueGrey,
+        centerTitle: true,
         title: Text(
           "USER SCREEN",
           style: TextStyle(
