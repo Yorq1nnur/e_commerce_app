@@ -1,4 +1,8 @@
+import 'package:e_commerce_app/screens/routes.dart';
+import 'package:e_commerce_app/utils/colors/app_colors.dart';
+import 'package:e_commerce_app/utils/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/models/category_model.dart';
@@ -16,21 +20,23 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Categories"),
+        elevation: 0,
+        backgroundColor: AppColors.white,
+        centerTitle: true,
+        title: Text(
+          "Categories",
+          style: AppTextStyle.interBold.copyWith(
+            color: AppColors.black,
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {
-              context.read<CategoriesViewModel>().insertCategory(
-                    CategoryModel(
-                      imageUrl:
-                          "https://static-assets.business.amazon.com/assets/in/24th-jan/705_Website_Blog_Appliances_1450x664.jpg.transform/1450x664/image.jpg",
-                      categoryName: "Maishiy texnikalar",
-                      docId: "",
-                    ),
-                    context,
-                  );
+              Navigator.pushNamed(context, RouteNames.addCategoryRoute);
             },
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.add, color: AppColors.black,),
           ),
         ],
       ),

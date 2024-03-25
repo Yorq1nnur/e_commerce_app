@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/screens/add_category/add_category_screen.dart';
 import 'package:e_commerce_app/screens/splash/splash_screen.dart';
 import 'package:e_commerce_app/screens/tabs/tab_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,8 @@ class AppRoutes {
 
       case RouteNames.registerRoute:
         return navigate(const RegisterScreen());
+      case RouteNames.addCategoryRoute:
+        return navigate(const AddCategoryScreen());
 
       default:
         return navigate(
@@ -41,4 +44,5 @@ class RouteNames {
   static const String tabRoute = "/tab_route";
   static const String loginRoute = "/login_route";
   static const String registerRoute = "/register_route";
+  static const String addCategoryRoute = "/add_category_route";
 }
