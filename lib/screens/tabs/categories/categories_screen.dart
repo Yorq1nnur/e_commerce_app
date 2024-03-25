@@ -73,109 +73,127 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               children: [
                 ...List.generate(
                   list.length,
-                  (index) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ZoomTapAnimation(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CategoryScreen(
-                                categoryModel: list[index],
+                  (index) => Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.black,
+                        width: 2.w,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ZoomTapAnimation(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CategoryScreen(
+                                  categoryModel: list[index],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        child: CachedNetworkImage(
-                          imageUrl: list[index].imageUrl,
-                          height: 200.h,
-                          width: 150.w,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            list[index].categoryName,
+                            );
+                          },
+                          child: CachedNetworkImage(
+                            imageUrl: list[index].imageUrl,
+                            height: 200.h,
+                            width: 150.w,
+                            fit: BoxFit.cover,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10.w,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ZoomTapAnimation(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => EditCategoryScreen(
-                                        categoryModel: list[index],
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: const Icon(Icons.edit),
+                              Text(
+                                list[index].categoryName,
                               ),
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                              ZoomTapAnimation(
-                                onTap: () async{
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        backgroundColor: AppColors.white,
-                                        title: const Text("Ishonchingiz komilmi?"),
-                                        titleTextStyle:
-                                        AppTextStyle.interBold.copyWith(
-                                          color: AppColors.black,
-                                          fontSize: 20.sp,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  ZoomTapAnimation(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              EditCategoryScreen(
+                                            categoryModel: list[index],
+                                          ),
                                         ),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () async {
-                                              context
-                                                  .read<CategoriesViewModel>()
-                                                  .deleteCategory(
-                                                list[index].docId,
-                                                context,
-                                              );
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text(
-                                              'Yes',
-                                              style:
-                                              AppTextStyle.interBold.copyWith(
-                                                color: AppColors.black,
-                                              ),
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text(
-                                              'No',
-                                              style: AppTextStyle.interBold
-                                                  .copyWith(color: AppColors.black),
-                                            ),
-                                          ),
-                                        ],
                                       );
                                     },
-                                  );
-                                },
-                                child: const Icon(Icons.delete),
-                              ),
+                                    child: const Icon(Icons.edit),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  ZoomTapAnimation(
+                                    onTap: () async {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            backgroundColor: AppColors.white,
+                                            title: const Text(
+                                                "Ishonchingiz komilmi?"),
+                                            titleTextStyle:
+                                                AppTextStyle.interBold.copyWith(
+                                              color: AppColors.black,
+                                              fontSize: 20.sp,
+                                            ),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () async {
+                                                  context
+                                                      .read<
+                                                          CategoriesViewModel>()
+                                                      .deleteCategory(
+                                                        list[index].docId,
+                                                        context,
+                                                      );
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  'Yes',
+                                                  style: AppTextStyle.interBold
+                                                      .copyWith(
+                                                    color: AppColors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text(
+                                                  'No',
+                                                  style: AppTextStyle.interBold
+                                                      .copyWith(
+                                                          color:
+                                                              AppColors.black),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: const Icon(Icons.delete),
+                                  ),
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
-                    ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
