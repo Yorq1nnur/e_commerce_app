@@ -1,7 +1,6 @@
 import 'package:e_commerce_app/screens/tabs/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../view_models/tab_view_model.dart';
 import 'book/books_screen.dart';
 import 'categories/categories_screen.dart';
@@ -14,7 +13,7 @@ class TabScreen extends StatefulWidget {
 }
 
 class _TabScreenState extends State<TabScreen> {
-  List<Widget> screens = const[
+  List<Widget> screens = const [
     CategoriesScreen(),
     BooksScreen(),
     ProfileScreen(),
@@ -35,7 +34,7 @@ class _TabScreenState extends State<TabScreen> {
             label: "Categories",
             activeIcon: Icon(
               Icons.category,
-              color: Colors.green,
+              color: Colors.blue,
             ),
           ),
           BottomNavigationBarItem(
@@ -43,7 +42,7 @@ class _TabScreenState extends State<TabScreen> {
             label: "Products",
             activeIcon: Icon(
               Icons.check_box_outline_blank,
-              color: Colors.green,
+              color: Colors.blue,
             ),
           ),
           BottomNavigationBarItem(
@@ -51,7 +50,7 @@ class _TabScreenState extends State<TabScreen> {
             label: "Profile",
             activeIcon: Icon(
               Icons.person,
-              color: Colors.green,
+              color: Colors.blue,
             ),
           )
         ],

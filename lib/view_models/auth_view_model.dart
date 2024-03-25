@@ -74,7 +74,7 @@ class AuthViewModel extends ChangeNotifier {
         if (!context.mounted) return;
         showSnackbar(
           context: context,
-          message: "Noma'lum xatolik yuz berdi:$error.",
+          message: "Noma'lum xatolik yuz berdi: $error.",
         );
       }
     } else {
