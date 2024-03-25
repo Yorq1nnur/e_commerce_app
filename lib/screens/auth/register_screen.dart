@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/screens/auth/widgets/my_text_field.dart';
 import 'package:e_commerce_app/utils/images/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -65,137 +66,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(
                       height: 32.h,
                     ),
-                    TextFormField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            width: 2.w,
-                          ),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            width: 2.w,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 2.w,
-                          ),
-                        ),
-                        labelText: "EMAIL",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: const BorderSide(
-                            width: 2,
-                            color: Colors.black54,
-                          ),
-                        ),
-                      ),
+                    MyTextField(
+                      textEditingController: emailController,
+                      labelText: "EMAIL",
+                      textInputAction: TextInputAction.next,
+                      textInputType: TextInputType.emailAddress,
+                      imagePath: AppImages.email,
                     ),
                     SizedBox(
                       height: 24.h,
                     ),
-                    TextFormField(
-                      controller: usernameController,
-                      decoration: InputDecoration(
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            width: 2.w,
-                          ),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.black54,
-                            width: 2.w,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 2.w,
-                          ),
-                        ),
-                        labelText: "USERNAME",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: const BorderSide(
-                            width: 2,
-                            color: Colors.green,
-                          ),
-                        ),
-                      ),
+                    MyTextField(
+                      textEditingController: usernameController,
+                      labelText: "USER NAME",
+                      textInputAction: TextInputAction.next,
+                      textInputType: TextInputType.name,
+                      imagePath: AppImages.user,
                     ),
                     SizedBox(
                       height: 24.h,
                     ),
-                    TextFormField(
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            width: 2.w,
-                          ),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            width: 2.w,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 2.w,
-                          ),
-                        ),
-                        labelText: "PASSWORD",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: const BorderSide(
-                            width: 2,
-                            color: Colors.black54,
-                          ),
-                        ),
-                      ),
+                    MyTextField(
+                      textEditingController: passwordController,
+                      labelText: "PASSWORD",
+                      textInputAction: TextInputAction.done,
+                      textInputType: TextInputType.visiblePassword,
+                      imagePath: AppImages.lock,
                     ),
                     Container(
                       height: 50.h,

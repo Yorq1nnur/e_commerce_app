@@ -1,10 +1,12 @@
 import 'package:e_commerce_app/screens/routes.dart';
+import 'package:e_commerce_app/utils/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../../data/models/book_model.dart';
+import '../../../utils/colors/app_colors.dart';
 import '../../../view_models/products_view_model.dart';
 
 class BooksScreen extends StatefulWidget {
@@ -26,8 +28,16 @@ class _BooksScreenState extends State<BooksScreen> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
+          centerTitle: true,
           backgroundColor: Colors.white,
-          title: const Text("Products"),
+          title: Text(
+            "Books",
+            style: AppTextStyle.interBold.copyWith(
+              color: AppColors.black,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
           actions: [
             ZoomTapAnimation(
               onTap: () {

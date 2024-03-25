@@ -3,7 +3,6 @@ import 'package:e_commerce_app/screens/add_category/add_category_screen.dart';
 import 'package:e_commerce_app/screens/splash/splash_screen.dart';
 import 'package:e_commerce_app/screens/tabs/tab_screen.dart';
 import 'package:flutter/material.dart';
-
 import 'auth/login_screen.dart';
 import 'auth/register_screen.dart';
 

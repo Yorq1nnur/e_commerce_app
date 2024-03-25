@@ -5,25 +5,30 @@ import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotificationService {
   static final LocalNotificationService localNotificationService =
-      LocalNotificationService._();
+  LocalNotificationService._();
 
   factory LocalNotificationService() {
     return localNotificationService;
   }
 
-  LocalNotificationService._();
+  LocalNotificationService._(){
+    init();
+  }
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin();
 
-  void init(GlobalKey<NavigatorState> navigatorKey) async {
+  var initializationSettingsAndroid =
+  const AndroidInitializationSettings('app_icon');
+
+  void init() async {
     // Android
     const AndroidInitializationSettings androidInitializationSettings =
-        AndroidInitializationSettings("app_icon");
+    AndroidInitializationSettings("app_icon");
 
     //IOS
     final DarwinInitializationSettings initializationSettingsDarwin =
-        DarwinInitializationSettings(
+    DarwinInitializationSettings(
       onDidReceiveLocalNotification: onDidReceiveLocalNotification,
     );
 
@@ -45,12 +50,12 @@ class LocalNotificationService {
 
     final bool? result = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
+        IOSFlutterLocalNotificationsPlugin>()
         ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+      alert: true,
+      badge: true,
+      sound: true,
+    );
     tz.initializeTimeZones();
   }
 
@@ -60,20 +65,18 @@ class LocalNotificationService {
   }
 
   AndroidNotificationChannel androidNotificationChannel =
-      const AndroidNotificationChannel(
+  const AndroidNotificationChannel(
     "my_channel",
-    "Notification Lesson ",
+    "Notification Lesson",
     importance: Importance.max,
     description: "My Notification description",
   );
 
   //IOS
-  void onDidReceiveLocalNotification(
-    int id,
-    String? title,
-    String? body,
-    String? payload,
-  ) async {
+  void onDidReceiveLocalNotification(int id,
+      String? title,
+      String? body,
+      String? payload,) async {
     debugPrint(payload);
   }
 
@@ -111,7 +114,9 @@ class LocalNotificationService {
     required String body,
     required int delayedTime,
   }) {
-    int id = DateTime.now().millisecond;
+    int id = DateTime
+        .now()
+        .millisecond;
 
     debugPrint("TIME ${DateTime.now()}");
     tz.TZDateTime tzDateTime = tz.TZDateTime.now(tz.local)
@@ -135,7 +140,7 @@ class LocalNotificationService {
       ),
       payload: "SCHEADULED NOTIFICATION PAYLOAD DATA ID:$id",
       uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
+      UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 

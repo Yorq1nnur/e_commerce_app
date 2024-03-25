@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/data/models/category_model.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
 import 'package:e_commerce_app/view_models/category_view_model.dart';
+import 'package:e_commerce_app/view_models/notifications_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -154,13 +155,27 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                       categoryName: categoryNameController.text,
                       docId: "",
                     );
-                    await context
-                        .read<CategoriesViewModel>()
-                        .insertCategory(category, context);
+                    await context.read<CategoriesViewModel>().insertCategory(
+                          category,
+                          context,
+                        );
+                    if (!context.mounted) return;
+                    context.read<NotificationsViewModel>().showNotifications(
+                          title: "YANGI KATEGORIYA QO'SHILDI!!!",
+                          body: categoryNameController.text,
+                          id: DateTime.now().millisecond,
+                        );
                     if (!context.mounted) return;
                     Navigator.pop(context);
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("PLEASE COMPLETE ALL DETAILS", textAlign: TextAlign.center,)));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "PLEASE COMPLETE ALL DETAILS",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
                   }
                 },
                 child: Container(

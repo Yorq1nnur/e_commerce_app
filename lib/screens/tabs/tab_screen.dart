@@ -38,10 +38,13 @@ class _TabScreenState extends State<TabScreen> {
             ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.check_box_outline_blank),
-            label: "Products",
+            icon: Icon(
+              Icons.book,
+              color: Colors.black,
+            ),
+            label: "Books",
             activeIcon: Icon(
-              Icons.check_box_outline_blank,
+              Icons.book,
               color: Colors.blue,
             ),
           ),
@@ -52,7 +55,7 @@ class _TabScreenState extends State<TabScreen> {
               Icons.person,
               color: Colors.blue,
             ),
-          )
+          ),
         ],
       ),
     );
