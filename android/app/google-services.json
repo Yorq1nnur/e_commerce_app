@@ -12,7 +12,12 @@
           "package_name": "com.example.e_commerce_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "762812355330-05laqkpcdhdkgfgmi9kkjanjsqql1kcg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAkt6Y0zXTaopOwSmZE64ZCkfv9akwQmDg"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762812355330-05laqkpcdhdkgfgmi9kkjanjsqql1kcg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "762812355330-nn0liimku3ot544gkpv8rptbm534hc7s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eCommerceApp"
+              }
+            }
+          ]
         }
       }
     }
