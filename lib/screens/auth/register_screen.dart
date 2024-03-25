@@ -89,7 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             16.r,
                           ),
                           borderSide: BorderSide(
-                            color: Colors.red,
+                            color: Colors.blue,
                             width: 2.w,
                           ),
                         ),
@@ -98,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(16),
                           borderSide: const BorderSide(
                             width: 2,
-                            color: Colors.green,
+                            color: Colors.black54,
                           ),
                         ),
                       ),
@@ -121,7 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             16.r,
                           ),
                           borderSide: BorderSide(
-                            color: Colors.red,
+                            color: Colors.black54,
                             width: 2.w,
                           ),
                         ),
@@ -130,7 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             16.r,
                           ),
                           borderSide: BorderSide(
-                            color: Colors.red,
+                            color: Colors.blue,
                             width: 2.w,
                           ),
                         ),
@@ -171,7 +171,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             16.r,
                           ),
                           borderSide: BorderSide(
-                            color: Colors.red,
+                            color: Colors.blue,
                             width: 2.w,
                           ),
                         ),
@@ -180,7 +180,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(16),
                           borderSide: const BorderSide(
                             width: 2,
-                            color: Colors.green,
+                            color: Colors.black54,
                           ),
                         ),
                       ),
