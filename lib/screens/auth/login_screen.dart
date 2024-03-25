@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:e_commerce_app/screens/auth/widgets/my_text_field.dart';
 import 'package:e_commerce_app/utils/colors/app_colors.dart';
 import 'package:e_commerce_app/utils/images/app_images.dart';
 import 'package:e_commerce_app/view_models/auth_view_model.dart';
@@ -60,93 +61,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: 20.h,
                     ),
-                    TextFormField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        labelText: "EMAIL",
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            width: 2.w,
-                          ),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.black54,
-                            width: 2.w,
-                          ),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            width: 2.w,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 2.w,
-                          ),
-                        ),
-                      ),
-                    ),
+MyTextField(textEditingController: emailController, labelText: "EMAIL", textInputAction: TextInputAction.next, textInputType: TextInputType.emailAddress, imagePath: AppImages.email,),
                     SizedBox(
                       height: 24.h,
                     ),
-                    TextFormField(
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.black54,
-                            width: 2.w,
-                          ),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            width: 2.w,
-                          ),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            width: 2.w,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            16.r,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 2.w,
-                          ),
-                        ),
-                        labelText: "PASSWORD",
-                      ),
-                    ),
+                    MyTextField(textEditingController: passwordController, labelText: "PASSWORD", textInputAction: TextInputAction.done, textInputType: TextInputType.visiblePassword, imagePath: AppImages.lock,),
                     Container(
                       height: 60.h,
                       width: double.infinity,
