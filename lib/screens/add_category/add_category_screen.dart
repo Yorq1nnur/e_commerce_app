@@ -36,11 +36,11 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
+          leading: ZoomTapAnimation(
+            onTap: () {
               Navigator.pop(context);
             },
-            icon: const Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: AppColors.black,
             ),

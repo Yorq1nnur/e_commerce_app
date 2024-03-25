@@ -3,6 +3,7 @@ import 'package:e_commerce_app/utils/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../utils/colors/app_colors.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -29,11 +30,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
+          leading: ZoomTapAnimation(
+            onTap: () {
               Navigator.pop(context);
             },
-            icon: const Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: AppColors.black,
             ),

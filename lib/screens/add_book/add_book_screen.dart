@@ -8,33 +8,29 @@ import 'package:provider/provider.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../utils/colors/app_colors.dart';
 
-class EditCategoryScreen extends StatefulWidget {
-  const EditCategoryScreen({
-    super.key,
-    required this.categoryModel,
-  });
-
-  final CategoryModel categoryModel;
+class AddBookScreen extends StatefulWidget {
+  const AddBookScreen({super.key});
 
   @override
-  State<EditCategoryScreen> createState() => _EditCategoryScreenState();
+  State<AddBookScreen> createState() => _AddBookScreenState();
 }
 
-class _EditCategoryScreenState extends State<EditCategoryScreen> {
-  final TextEditingController categoryNameController = TextEditingController();
+class _AddBookScreenState extends State<AddBookScreen> {
+  final TextEditingController bookNameController = TextEditingController();
+  final TextEditingController bookDescriptionController =
+      TextEditingController();
   final TextEditingController imageUrlController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
 
   @override
   void dispose() {
-    categoryNameController.dispose();
+    bookNameController.dispose();
     imageUrlController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    String categoryName = '';
-    String imageUrl = '';
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
@@ -57,7 +53,7 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
           elevation: 0,
           backgroundColor: AppColors.white,
           title: Text(
-            "ADD CATEGORY",
+            "ADD BOOK",
             style: AppTextStyle.interBold.copyWith(
               fontSize: 20.sp,
               fontWeight: FontWeight.w900,
@@ -73,13 +69,10 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextFormField(
-                onChanged: (v){
-                  categoryName = v;
-                },
-                controller: categoryNameController,
+                controller: bookNameController,
                 decoration: InputDecoration(
                   label: const Text(
-                    "CATEGORY NAME",
+                    "BOOK NAME",
                   ),
                   labelStyle: AppTextStyle.interBold.copyWith(
                     fontSize: 10.sp,
@@ -117,9 +110,47 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
                 height: 24.h,
               ),
               TextFormField(
-                onChanged: (v){
-                  imageUrl = v;
-                },
+                controller: bookDescriptionController,
+                decoration: InputDecoration(
+                  label: const Text(
+                    "BOOK DESCRIPTION",
+                  ),
+                  labelStyle: AppTextStyle.interBold.copyWith(
+                    fontSize: 10.sp,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      16.r,
+                    ),
+                    borderSide: BorderSide(
+                      color: Colors.black54,
+                      width: 2.w,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      16.r,
+                    ),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 2.w,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      16.r,
+                    ),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 2.w,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              TextFormField(
                 controller: imageUrlController,
                 decoration: InputDecoration(
                   label: const Text(
@@ -157,19 +188,73 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 24.h,
+              ),
+              TextFormField(
+                controller: priceController,
+                decoration: InputDecoration(
+                  label: const Text(
+                    "BOOK'S PRICE",
+                  ),
+                  labelStyle: AppTextStyle.interBold.copyWith(
+                    fontSize: 10.sp,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      16.r,
+                    ),
+                    borderSide: BorderSide(
+                      color: Colors.black54,
+                      width: 2.w,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      16.r,
+                    ),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 2.w,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      16.r,
+                    ),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 2.w,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+
               const Spacer(),
               ZoomTapAnimation(
                 onTap: () async {
-                  CategoryModel category = CategoryModel(
-                    imageUrl: imageUrl == "" ? widget.categoryModel.imageUrl : imageUrl,
-                    categoryName: categoryName == "" ? widget.categoryModel.categoryName : categoryName,
-                    docId: widget.categoryModel.docId,
-                  );
-                  await context
-                      .read<CategoriesViewModel>()
-                      .updateCategory(category, context);
-                  if (!context.mounted) return;
-                  Navigator.pop(context);
+                  if (bookNameController.text != "" &&
+                      imageUrlController.text != "") {
+                    CategoryModel category = CategoryModel(
+                      imageUrl: imageUrlController.text,
+                      categoryName: bookNameController.text,
+                      docId: "",
+                    );
+                    await context
+                        .read<CategoriesViewModel>()
+                        .insertCategory(category, context);
+                    if (!context.mounted) return;
+                    Navigator.pop(context);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text(
+                      "PLEASE COMPLETE ALL DETAILS",
+                      textAlign: TextAlign.center,
+                    )));
+                  }
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(

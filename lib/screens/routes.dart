@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/screens/add_book/add_book_screen.dart';
 import 'package:e_commerce_app/screens/add_category/add_category_screen.dart';
 import 'package:e_commerce_app/screens/splash/splash_screen.dart';
 import 'package:e_commerce_app/screens/tabs/tab_screen.dart';
@@ -22,6 +23,8 @@ class AppRoutes {
         return navigate(const RegisterScreen());
       case RouteNames.addCategoryRoute:
         return navigate(const AddCategoryScreen());
+      case RouteNames.addBookRoute:
+        return navigate(const AddBookScreen());
 
       default:
         return navigate(
@@ -45,4 +48,5 @@ class RouteNames {
   static const String loginRoute = "/login_route";
   static const String registerRoute = "/register_route";
   static const String addCategoryRoute = "/add_category_route";
+  static const String addBookRoute = "/add_book_route";
 }

@@ -1,7 +1,7 @@
 class BookModel {
   final String docId;
-  final String productName;
-  final String productDescription;
+  final String bookName;
+  final String bookDescription;
   final double price;
   final String imageUrl;
   final String categoryId;
@@ -9,9 +9,9 @@ class BookModel {
   BookModel({
     required this.price,
     required this.imageUrl,
-    required this.productName,
+    required this.bookName,
     required this.docId,
-    required this.productDescription,
+    required this.bookDescription,
     required this.categoryId,
   });
 
@@ -20,8 +20,8 @@ class BookModel {
       docId: json["doc_id"] as String? ?? "",
       imageUrl: json["image_url"] as String? ?? "",
       categoryId: json["category_id"] as String? ?? "",
-      productName: json["product_name"] as String? ?? "",
-      productDescription: json["product_description"] as String? ?? "",
+      bookName: json["product_name"] as String? ?? "",
+      bookDescription: json["product_description"] as String? ?? "",
       price: json["price"] as double? ?? 0.0,
     );
   }
@@ -30,8 +30,8 @@ class BookModel {
     return {
       "doc_id": "",
       "image_url": imageUrl,
-      "product_name": productName,
-      "product_description": productDescription,
+      "product_name": bookName,
+      "product_description": bookDescription,
       "price": price,
       "category_id": categoryId,
     };
@@ -40,8 +40,8 @@ class BookModel {
   Map<String, dynamic> toJsonForUpdate() {
     return {
       "image_url": imageUrl,
-      "product_name": productName,
-      "product_description": productDescription,
+      "product_name": bookName,
+      "product_description": bookDescription,
       "price": price,
       "category_id": categoryId,
     };

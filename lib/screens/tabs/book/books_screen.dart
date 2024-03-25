@@ -1,6 +1,9 @@
+import 'package:e_commerce_app/screens/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../../data/models/book_model.dart';
 import '../../../view_models/products_view_model.dart';
 
@@ -26,22 +29,20 @@ class _BooksScreenState extends State<BooksScreen> {
           backgroundColor: Colors.white,
           title: const Text("Products"),
           actions: [
-            IconButton(
-              onPressed: () {
-                context.read<ProductsViewModel>().insertProducts(
-                      BookModel(
-                        price: 12.5,
-                        imageUrl:
-                            "https://i.ebayimg.com/images/g/IUMAAOSwZGBkTR-K/s-l400.png",
-                        productName: "Nokia 12 80",
-                        docId: "",
-                        productDescription: "productDescription",
-                        categoryId: "kcggCJzOEz7gH1LQy44x",
-                      ),
-                      context,
-                    );
+            ZoomTapAnimation(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  RouteNames.addBookRoute,
+                );
               },
-              icon: const Icon(Icons.add),
+              child: const Icon(
+                Icons.add,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(
+              width: 20.w,
             ),
           ],
         ),
@@ -66,7 +67,7 @@ class _BooksScreenState extends State<BooksScreen> {
                           product.imageUrl,
                           width: 50,
                         ),
-                        title: Text(product.productName),
+                        title: Text(product.bookName),
                         subtitle: Text(product.docId),
                         trailing: SizedBox(
                           width: 100,
@@ -89,9 +90,9 @@ class _BooksScreenState extends State<BooksScreen> {
                                           price: product.price,
                                           imageUrl:
                                               "https://upload.wikimedia.org/wikipedia/commons/2/2c/NOKIA_1280.jpg",
-                                          productName: "Galaxy",
+                                          bookName: "Galaxy",
                                           docId: product.docId,
-                                          productDescription: "",
+                                          bookDescription: "",
                                           categoryId: product.categoryId,
                                         ),
                                         context,
