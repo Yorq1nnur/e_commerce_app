@@ -38,7 +38,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       child: Scaffold(
         body: context.watch<AuthViewModel>().loading
-            ? const Center(child: CircularProgressIndicator())
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
             : Container(
                 padding: EdgeInsets.all(24.w),
                 child: ListView(
@@ -95,7 +97,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         labelText: "EMAIL",
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(
+                            16.r,
+                          ),
                           borderSide: const BorderSide(
                             width: 2,
                             color: Colors.black54,
@@ -103,7 +107,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 24.h),
+                    SizedBox(
+                      height: 24.h,
+                    ),
                     TextFormField(
                       controller: usernameController,
                       decoration: InputDecoration(
@@ -136,7 +142,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         labelText: "USERNAME",
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(
+                            16.r,
+                          ),
                           borderSide: const BorderSide(
                             width: 2,
                             color: Colors.green,
@@ -144,7 +152,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 24.h),
+                    SizedBox(
+                      height: 24.h,
+                    ),
                     TextFormField(
                       controller: passwordController,
                       decoration: InputDecoration(
@@ -177,7 +187,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         labelText: "PASSWORD",
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(
+                            16.r,
+                          ),
                           borderSide: const BorderSide(
                             width: 2,
                             color: Colors.black54,
@@ -188,12 +200,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Container(
                       height: 50.h,
                       width: double.infinity,
-                      margin: EdgeInsets.only(top: 24.h),
+                      margin: EdgeInsets.only(
+                        top: 24.h,
+                      ),
                       child: TextButton(
                         style: TextButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16))),
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              16.r,
+                            ),
+                          ),
+                        ),
                         onPressed: () {
                           context.read<AuthViewModel>().registerUser(
                                 context,
@@ -204,28 +222,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                         child: Text(
                           "REGISTER",
-                          style: AppTextStyle.interSemiBold
-                              .copyWith(fontSize: 24, color: Colors.white),
+                          style: AppTextStyle.interSemiBold.copyWith(
+                            fontSize: 24,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                     Container(
                       height: 50.h,
                       width: double.infinity,
-                      margin: EdgeInsets.only(top: 24.h),
+                      margin: EdgeInsets.only(
+                        top: 24.h,
+                      ),
                       child: TextButton(
                         style: TextButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16))),
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              16.r,
+                            ),
+                          ),
+                        ),
                         onPressed: () {
                           Navigator.pushReplacementNamed(
-                              context, RouteNames.loginRoute);
+                            context,
+                            RouteNames.loginRoute,
+                          );
                         },
                         child: Text(
                           "LOGIN",
-                          style: AppTextStyle.interSemiBold
-                              .copyWith(fontSize: 24, color: Colors.white),
+                          style: AppTextStyle.interSemiBold.copyWith(
+                            fontSize: 24,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     )

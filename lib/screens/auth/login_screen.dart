@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       child: TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: Colors.blue,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                               16.r,
@@ -190,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       child: TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: Colors.blue,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                               16.r,
@@ -221,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       child: TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: Colors.blue,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                               16.r,
