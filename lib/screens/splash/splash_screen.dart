@@ -1,5 +1,7 @@
+import 'package:e_commerce_app/utils/images/app_images.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../routes.dart';
 
@@ -34,12 +36,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Icon(
-          Icons.access_time_filled_outlined,
-          color: Colors.green,
-          size: 200,
+        child: Lottie.asset(
+          AppImages.lottie,
         ),
       ),
     );
