@@ -1,9 +1,9 @@
-import 'package:e_commerce_app/screens/tabs/products/products_screen.dart';
 import 'package:e_commerce_app/screens/tabs/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../view_models/tab_view_model.dart';
+import 'book/books_screen.dart';
 import 'categories/categories_screen.dart';
 
 class TabScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class TabScreen extends StatefulWidget {
 class _TabScreenState extends State<TabScreen> {
   List<Widget> screens = const[
     CategoriesScreen(),
-    ProductsScreen(),
+    BooksScreen(),
     ProfileScreen(),
   ];
 

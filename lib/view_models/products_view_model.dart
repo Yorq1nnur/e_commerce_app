@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_commerce_app/data/models/product_model.dart';
+import 'package:e_commerce_app/data/models/book_model.dart';
 import 'package:e_commerce_app/utils/constants/app_constants.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -10,14 +10,14 @@ class ProductsViewModel extends ChangeNotifier {
 
   bool get getLoader => _isLoading;
 
-  List<ProductModel> categoryProduct = [];
+  List<BookModel> categoryProduct = [];
 
-  Stream<List<ProductModel>> listenProducts() => FirebaseFirestore.instance
+  Stream<List<BookModel>> listenProducts() => FirebaseFirestore.instance
       .collection(AppConstants.books)
       .snapshots()
       .map(
         (event) =>
-            event.docs.map((doc) => ProductModel.fromJson(doc.data())).toList(),
+            event.docs.map((doc) => BookModel.fromJson(doc.data())).toList(),
       );
 
   Future<void> getProductsByCategory(String categoryDocId) async {
@@ -28,12 +28,12 @@ class ProductsViewModel extends ChangeNotifier {
         .get()
         .then((snapshot) {
       categoryProduct =
-          snapshot.docs.map((e) => ProductModel.fromJson(e.data())).toList();
+          snapshot.docs.map((e) => BookModel.fromJson(e.data())).toList();
     });
     _notify(false);
   }
 
-  insertProducts(ProductModel productModel, BuildContext context) async {
+  insertProducts(BookModel productModel, BuildContext context) async {
     try {
       _notify(true);
       var cf = await FirebaseFirestore.instance
@@ -55,7 +55,7 @@ class ProductsViewModel extends ChangeNotifier {
     }
   }
 
-  updateProduct(ProductModel productModel, BuildContext context) async {
+  updateProduct(BookModel productModel, BuildContext context) async {
     try {
       _notify(true);
       await FirebaseFirestore.instance

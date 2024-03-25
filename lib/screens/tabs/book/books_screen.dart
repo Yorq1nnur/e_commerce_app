@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../data/models/product_model.dart';
+import '../../../data/models/book_model.dart';
 import '../../../view_models/products_view_model.dart';
 
-class ProductsScreen extends StatefulWidget {
-  const ProductsScreen({super.key});
+class BooksScreen extends StatefulWidget {
+  const BooksScreen({super.key});
 
   @override
-  State<ProductsScreen> createState() => _ProductsScreenState();
+  State<BooksScreen> createState() => _BooksScreenState();
 }
 
-class _ProductsScreenState extends State<ProductsScreen> {
+class _BooksScreenState extends State<BooksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           IconButton(
             onPressed: () {
               context.read<ProductsViewModel>().insertProducts(
-                    ProductModel(
+                    BookModel(
                       price: 12.5,
                       imageUrl:
                           "https://i.ebayimg.com/images/g/IUMAAOSwZGBkTR-K/s-l400.png",
@@ -37,7 +37,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           ),
         ],
       ),
-      body: StreamBuilder<List<ProductModel>>(
+      body: StreamBuilder<List<BookModel>>(
         stream: context.read<ProductsViewModel>().listenProducts(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -46,13 +46,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
             );
           }
           if (snapshot.hasData) {
-            List<ProductModel> list = snapshot.data as List<ProductModel>;
+            List<BookModel> list = snapshot.data as List<BookModel>;
             return ListView(
               children: [
                 ...List.generate(
                   list.length,
                   (index) {
-                    ProductModel product = list[index];
+                    BookModel product = list[index];
                     return ListTile(
                       leading: Image.network(
                         product.imageUrl,
@@ -75,7 +75,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                             IconButton(
                               onPressed: () {
                                 context.read<ProductsViewModel>().updateProduct(
-                                      ProductModel(
+                                      BookModel(
                                         price: product.price,
                                         imageUrl:
                                             "https://upload.wikimedia.org/wikipedia/commons/2/2c/NOKIA_1280.jpg",

@@ -1,4 +1,4 @@
-class ProductModel {
+class BookModel {
   final String docId;
   final String productName;
   final String productDescription;
@@ -6,7 +6,7 @@ class ProductModel {
   final String imageUrl;
   final String categoryId;
 
-  ProductModel({
+  BookModel({
     required this.price,
     required this.imageUrl,
     required this.productName,
@@ -15,8 +15,8 @@ class ProductModel {
     required this.categoryId,
   });
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
+  factory BookModel.fromJson(Map<String, dynamic> json) {
+    return BookModel(
       docId: json["doc_id"] as String? ?? "",
       imageUrl: json["image_url"] as String? ?? "",
       categoryId: json["category_id"] as String? ?? "",
