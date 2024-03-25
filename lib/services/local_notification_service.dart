@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotificationService {
   static final LocalNotificationService localNotificationService =
@@ -11,9 +9,7 @@ class LocalNotificationService {
     return localNotificationService;
   }
 
-  LocalNotificationService._(){
-    init();
-  }
+  LocalNotificationService._();
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   FlutterLocalNotificationsPlugin();
@@ -56,7 +52,6 @@ class LocalNotificationService {
       badge: true,
       sound: true,
     );
-    tz.initializeTimeZones();
   }
 
   @pragma('vm:entry-point')
@@ -107,41 +102,6 @@ class LocalNotificationService {
             )),
         payload: "news_screen");
     debugPrint("CURRENT NOTIFICATION ID:$id");
-  }
-
-  void scheduleNotification({
-    required String title,
-    required String body,
-    required int delayedTime,
-  }) {
-    int id = DateTime
-        .now()
-        .millisecond;
-
-    debugPrint("TIME ${DateTime.now()}");
-    tz.TZDateTime tzDateTime = tz.TZDateTime.now(tz.local)
-        .add(Duration(seconds: 5 * 60 * 60 + delayedTime + 5));
-    debugPrint(tzDateTime.toString());
-    flutterLocalNotificationsPlugin.zonedSchedule(
-      123764,
-      title,
-      body,
-      tzDateTime,
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          androidNotificationChannel.id,
-          androidNotificationChannel.name,
-          priority: Priority.max,
-          playSound: true,
-          icon: "app_icon",
-          showProgress: true,
-          largeIcon: const DrawableResourceAndroidBitmap('app_icon'),
-        ),
-      ),
-      payload: "SCHEADULED NOTIFICATION PAYLOAD DATA ID:$id",
-      uiLocalNotificationDateInterpretation:
-      UILocalNotificationDateInterpretation.absoluteTime,
-    );
   }
 
   void showPeriodicNotification({
