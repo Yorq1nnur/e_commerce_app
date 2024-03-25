@@ -13,7 +13,7 @@ class ProductsViewModel extends ChangeNotifier {
   List<ProductModel> categoryProduct = [];
 
   Stream<List<ProductModel>> listenProducts() => FirebaseFirestore.instance
-      .collection(AppConstants.products)
+      .collection(AppConstants.books)
       .snapshots()
       .map(
         (event) =>
@@ -23,7 +23,7 @@ class ProductsViewModel extends ChangeNotifier {
   Future<void> getProductsByCategory(String categoryDocId) async {
     _notify(true);
     await FirebaseFirestore.instance
-        .collection(AppConstants.products)
+        .collection(AppConstants.books)
         .where("category_id", isEqualTo: categoryDocId)
         .get()
         .then((snapshot) {
@@ -37,11 +37,11 @@ class ProductsViewModel extends ChangeNotifier {
     try {
       _notify(true);
       var cf = await FirebaseFirestore.instance
-          .collection(AppConstants.products)
+          .collection(AppConstants.books)
           .add(productModel.toJson());
 
       await FirebaseFirestore.instance
-          .collection(AppConstants.products)
+          .collection(AppConstants.books)
           .doc(cf.id)
           .update({"doc_id": cf.id});
 
@@ -59,7 +59,7 @@ class ProductsViewModel extends ChangeNotifier {
     try {
       _notify(true);
       await FirebaseFirestore.instance
-          .collection(AppConstants.products)
+          .collection(AppConstants.books)
           .doc(productModel.docId)
           .update(productModel.toJsonForUpdate());
 
@@ -77,7 +77,7 @@ class ProductsViewModel extends ChangeNotifier {
     try {
       _notify(true);
       await FirebaseFirestore.instance
-          .collection(AppConstants.products)
+          .collection(AppConstants.books)
           .doc(docId)
           .delete();
 
