@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 32.h,
+                      height: 20.h,
                     ),
                     TextFormField(
                       controller: emailController,
@@ -117,7 +117,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: 2.w,
                           ),
                         ),
-
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(
                             16.r,
@@ -151,8 +150,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     Container(
                       height: 60.h,
                       width: double.infinity,
-                      margin: EdgeInsets.all(
-                        24.r,
+                      margin: EdgeInsets.only(
+                        top: 24.h,
+                        left: 24.w,
+                        right: 24.w,
                       ),
                       child: TextButton(
                         style: TextButton.styleFrom(
@@ -179,15 +180,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 24.h,
-                    ),
                     Container(
                       height: 60.h,
                       width: double.infinity,
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 24.w,
-                        vertical: 24.h,
+                      margin: EdgeInsets.only(
+                        top: 24.h,
+                        left: 24.w,
+                        right: 24.w,
                       ),
                       child: TextButton(
                         style: TextButton.styleFrom(
