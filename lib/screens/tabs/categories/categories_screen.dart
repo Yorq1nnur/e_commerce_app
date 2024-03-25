@@ -59,72 +59,76 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           if (snapshot.hasData) {
             List<CategoryModel> list = snapshot.data as List<CategoryModel>;
             return GridView.count(
+              primary: false,
               physics: const BouncingScrollPhysics(),
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.w,
+                vertical: 20.h,
+              ),
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
               crossAxisCount: 2,
+              childAspectRatio: 0.45,
               children: [
                 ...List.generate(
                   list.length,
-                  (index) => Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            CachedNetworkImage(
-                              imageUrl: list[index].imageUrl,
-                              height: 110.h,
-                              width: 110.w,
-                              fit: BoxFit.cover,
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Text(
-                              list[index].categoryName,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 30.w,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ZoomTapAnimation(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => EditCategoryScreen(
-                                      categoryModel: list[index],
-                                    ),
+                      (index) =>
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ZoomTapAnimation(child: CachedNetworkImage(
+                            imageUrl: list[index].imageUrl,
+                            height: 200.h,
+                            width: 150.w,
+                            fit: BoxFit.cover,
+                          ),
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                list[index].categoryName,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  ZoomTapAnimation(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              EditCategoryScreen(
+                                                categoryModel: list[index],
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                    child: const Icon(Icons.edit),
                                   ),
-                                );
-                              },
-                              child: const Icon(Icons.edit),
-                            ),
-                            ZoomTapAnimation(
-                              onTap: () {
-                                context
-                                    .read<CategoriesViewModel>()
-                                    .deleteCategory(
-                                      list[index].docId,
-                                      context,
-                                    );
-                              },
-                              child: const Icon(Icons.delete),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  ZoomTapAnimation(
+                                    onTap: () {
+                                      context
+                                          .read<CategoriesViewModel>()
+                                          .deleteCategory(
+                                        list[index].docId,
+                                        context,
+                                      );
+                                    },
+                                    child: const Icon(Icons.delete),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                 ),
               ],
             );
