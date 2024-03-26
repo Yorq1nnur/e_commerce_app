@@ -100,6 +100,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   child: ZoomTapAnimation(
+                    onTap: (){
+                      context.read<NotificationsViewModel>().cancelAllNotifications();
+                    },
                     child: Center(
                       child: Text(
                         "CANCEL ALL NOTIFICATIONS",
