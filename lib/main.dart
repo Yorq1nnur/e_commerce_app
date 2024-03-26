@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
       ),
       builder: (context, child) {
         ScreenUtil.init(context);
-        final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
         LocalNotificationService.localNotificationService.init();
         return MaterialApp(
           debugShowCheckedModeBanner: false,
