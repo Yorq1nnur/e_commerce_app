@@ -23,7 +23,9 @@ class EditBookScreen extends StatefulWidget {
   @override
   State<EditBookScreen> createState() => _EditBookScreenState();
 }
+
 int activeIndex = -1;
+
 class _EditBookScreenState extends State<EditBookScreen> {
   @override
   Widget build(BuildContext context) {
@@ -393,7 +395,8 @@ class _EditBookScreenState extends State<EditBookScreen> {
                                   (index) => CategoryButton(
                                     title: list[index].categoryName,
                                     onTap: () {
-                                      debugPrint("\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
+                                      debugPrint(
+                                          "\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
                                       categoryDocId = list[index].docId;
                                       debugPrint(categoryDocId);
                                       setState(() {

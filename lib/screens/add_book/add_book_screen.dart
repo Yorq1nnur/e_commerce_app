@@ -38,10 +38,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
   String categoryDocId = '';
   int activeIndex = -1;
 
-
   @override
   Widget build(BuildContext context) {
-
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
@@ -389,7 +387,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                                     (index) => CategoryButton(
                                       title: list[index].categoryName,
                                       onTap: () {
-                                        debugPrint("\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
+                                        debugPrint(
+                                            "\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
                                         categoryDocId = list[index].docId;
                                         debugPrint(categoryDocId);
                                         setState(() {
