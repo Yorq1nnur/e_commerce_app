@@ -120,8 +120,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          context.read<AuthViewModel>().registerUser(
+                        onPressed: () async {
+                          await context.read<AuthViewModel>().registerUser(
                                 context,
                                 email: email,
                                 password: password,

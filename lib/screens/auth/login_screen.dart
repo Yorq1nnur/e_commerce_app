@@ -103,11 +103,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          context.read<AuthViewModel>().loginUser(
+                        onPressed: () async{
+                          await context.read<AuthViewModel>().loginUser(
                                 context,
-                                email: email,
-                                password: password,
+                                email: emailController.text,
+                                password: passwordController.text,
                               );
                         },
                         child: Text(
