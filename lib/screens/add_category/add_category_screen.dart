@@ -67,6 +67,8 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextFormField(
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
                 controller: categoryNameController,
                 decoration: InputDecoration(
                   label: const Text(
@@ -108,6 +110,8 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                 height: 24.h,
               ),
               TextFormField(
+                keyboardType: TextInputType.url,
+                textInputAction: TextInputAction.done,
                 controller: imageUrlController,
                 decoration: InputDecoration(
                   label: const Text(
@@ -161,7 +165,8 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                         );
                     if (!context.mounted) return;
                     context.read<NotificationsViewModel>().showNotifications(
-                          title: "${categoryNameController.text} NOMLI YANGI KATEGORIYA QO'SHILDI!!!",
+                          title:
+                              "${categoryNameController.text} NOMLI YANGI KATEGORIYA QO'SHILDI!!!",
                           body: categoryNameController.text,
                           id: DateTime.now().millisecond,
                         );

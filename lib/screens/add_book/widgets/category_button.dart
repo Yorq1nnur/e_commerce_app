@@ -6,9 +6,9 @@ import '../../../utils/styles/app_text_style.dart';
 class CategoryButton extends StatelessWidget {
   const CategoryButton(
       {super.key,
-        required this.title,
-        required this.onTap,
-        required this.isActive});
+      required this.title,
+      required this.onTap,
+      required this.isActive});
 
   final String title;
   final VoidCallback onTap;

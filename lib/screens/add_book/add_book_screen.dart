@@ -92,6 +92,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             TextFormField(
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.next,
                               controller: bookNameController,
                               decoration: InputDecoration(
                                 label: const Text(
@@ -133,6 +135,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                               height: 24.h,
                             ),
                             TextFormField(
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.next,
                               controller: bookAuthorController,
                               decoration: InputDecoration(
                                 label: const Text(
@@ -174,6 +178,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                               height: 24.h,
                             ),
                             TextFormField(
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.next,
                               controller: bookDescriptionController,
                               decoration: InputDecoration(
                                 label: const Text(
@@ -215,6 +221,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                               height: 24.h,
                             ),
                             TextFormField(
+                              keyboardType: TextInputType.url,
+                              textInputAction: TextInputAction.next,
                               controller: imageUrlController,
                               decoration: InputDecoration(
                                 label: const Text(
@@ -256,6 +264,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                               height: 24.h,
                             ),
                             TextFormField(
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.next,
                               controller: rateController,
                               decoration: InputDecoration(
                                 label: const Text(
@@ -297,6 +307,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                               height: 24.h,
                             ),
                             TextFormField(
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.done,
                               controller: priceController,
                               decoration: InputDecoration(
                                 label: const Text(

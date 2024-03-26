@@ -125,7 +125,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                     ),
                                   );
                                 },
-                                child: const Icon(Icons.edit, color: Colors.blue,),
+                                child: const Icon(
+                                  Icons.edit,
+                                  color: Colors.blue,
+                                ),
                               ),
                               SizedBox(
                                 width: 50.w,
@@ -154,17 +157,23 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                                     context,
                                                   );
                                               if (!context.mounted) return;
-                                              context.read<NotificationsViewModel>().showNotifications(
-                                                title: "${list[index].categoryName} NOMLI YANGI KATEGORIYA QO'SHILDI!!!",
-                                                body: list[index].categoryName,
-                                                id: DateTime.now().millisecond,
-                                              );
+                                              context
+                                                  .read<
+                                                      NotificationsViewModel>()
+                                                  .showNotifications(
+                                                    title:
+                                                        "${list[index].categoryName} NOMLI YANGI KATEGORIYA QO'SHILDI!!!",
+                                                    body: list[index]
+                                                        .categoryName,
+                                                    id: DateTime.now()
+                                                        .millisecond,
+                                                  );
                                               Navigator.pop(context);
                                             },
                                             child: Text(
                                               'Yes',
-                                              style:
-                                                  AppTextStyle.interBold.copyWith(
+                                              style: AppTextStyle.interBold
+                                                  .copyWith(
                                                 color: AppColors.black,
                                               ),
                                             ),
@@ -185,7 +194,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                     },
                                   );
                                 },
-                                child: const Icon(Icons.delete, color: Colors.red,),
+                                child: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
                               ),
                             ],
                           ),

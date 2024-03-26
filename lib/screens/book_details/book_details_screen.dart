@@ -85,7 +85,7 @@ class BookDetailsScreen extends StatelessWidget {
                                   backgroundColor: AppColors.white,
                                   title: const Text("Ishonchingiz komilmi?"),
                                   titleTextStyle:
-                                  AppTextStyle.interBold.copyWith(
+                                      AppTextStyle.interBold.copyWith(
                                     color: AppColors.black,
                                     fontSize: 20.sp,
                                   ),
@@ -94,7 +94,8 @@ class BookDetailsScreen extends StatelessWidget {
                                       onPressed: () async {
                                         context
                                             .read<BooksViewModel>()
-                                            .deleteProduct(bookModel.docId, context);
+                                            .deleteProduct(
+                                                bookModel.docId, context);
                                         Future.delayed(
                                           const Duration(seconds: 1),
                                         );
@@ -111,8 +112,7 @@ class BookDetailsScreen extends StatelessWidget {
                                       },
                                       child: Text(
                                         'Yes',
-                                        style:
-                                        AppTextStyle.interBold.copyWith(
+                                        style: AppTextStyle.interBold.copyWith(
                                           color: AppColors.black,
                                         ),
                                       ),

@@ -74,7 +74,7 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextFormField(
-                onChanged: (v){
+                onChanged: (v) {
                   categoryName = v;
                 },
                 controller: categoryNameController,
@@ -118,7 +118,7 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
                 height: 24.h,
               ),
               TextFormField(
-                onChanged: (v){
+                onChanged: (v) {
                   imageUrl = v;
                 },
                 controller: imageUrlController,
@@ -162,8 +162,12 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
               ZoomTapAnimation(
                 onTap: () async {
                   CategoryModel category = CategoryModel(
-                    imageUrl: imageUrl == "" ? widget.categoryModel.imageUrl : imageUrl,
-                    categoryName: categoryName == "" ? widget.categoryModel.categoryName : categoryName,
+                    imageUrl: imageUrl == ""
+                        ? widget.categoryModel.imageUrl
+                        : imageUrl,
+                    categoryName: categoryName == ""
+                        ? widget.categoryModel.categoryName
+                        : categoryName,
                     docId: widget.categoryModel.docId,
                   );
                   await context
@@ -171,10 +175,11 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
                       .updateCategory(category, context);
                   if (!context.mounted) return;
                   context.read<NotificationsViewModel>().showNotifications(
-                    title: "${categoryNameController.text} NOMLI KATEGORIYA TAHRIRLANDI!!!",
-                    body: categoryNameController.text,
-                    id: DateTime.now().millisecond,
-                  );
+                        title:
+                            "${categoryNameController.text} NOMLI KATEGORIYA TAHRIRLANDI!!!",
+                        body: categoryNameController.text,
+                        id: DateTime.now().millisecond,
+                      );
                   if (!context.mounted) return;
                   Navigator.pop(context);
                 },

@@ -157,8 +157,8 @@ class _BooksScreenState extends State<BooksScreen> {
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                           backgroundColor: AppColors.white,
-                                          title:
-                                              const Text("Ishonchingiz komilmi?"),
+                                          title: const Text(
+                                              "Ishonchingiz komilmi?"),
                                           titleTextStyle:
                                               AppTextStyle.interBold.copyWith(
                                             color: AppColors.black,
@@ -180,7 +180,8 @@ class _BooksScreenState extends State<BooksScreen> {
                                                     .showNotifications(
                                                       title:
                                                           "${list[index].bookName} NOMLI YANGI KITOB O'CHIRILDI!!!",
-                                                      body: list[index].bookName,
+                                                      body:
+                                                          list[index].bookName,
                                                       id: DateTime.now()
                                                           .millisecond,
                                                     );

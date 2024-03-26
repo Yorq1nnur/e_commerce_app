@@ -12,22 +12,22 @@ class BooksViewModel extends ChangeNotifier {
 
   List<BookModel> categoryProduct = [];
 
-  Stream<List<BookModel>> listenProducts() => FirebaseFirestore.instance
-      .collection(AppConstants.books)
-      .snapshots()
-      .map(
-        (event) =>
-            event.docs.map((doc) => BookModel.fromJson(doc.data())).toList(),
-      );
+  Stream<List<BookModel>> listenProducts() =>
+      FirebaseFirestore.instance.collection(AppConstants.books).snapshots().map(
+            (event) => event.docs
+                .map((doc) => BookModel.fromJson(doc.data()))
+                .toList(),
+          );
 
-  Stream<List<BookModel>> listenProductsByCategory({required String categoryDocId}) => FirebaseFirestore.instance
-      .collection(AppConstants.books)
-      .where("category_id", isEqualTo: categoryDocId)
-      .snapshots()
-      .map((querySnapshot) => querySnapshot.docs
-      .map((doc) => BookModel.fromJson(doc.data()))
-      .toList());
-
+  Stream<List<BookModel>> listenProductsByCategory(
+          {required String categoryDocId}) =>
+      FirebaseFirestore.instance
+          .collection(AppConstants.books)
+          .where("category_id", isEqualTo: categoryDocId)
+          .snapshots()
+          .map((querySnapshot) => querySnapshot.docs
+              .map((doc) => BookModel.fromJson(doc.data()))
+              .toList());
 
   insertProducts(BookModel productModel, BuildContext context) async {
     try {

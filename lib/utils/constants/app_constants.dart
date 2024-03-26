@@ -6,7 +6,8 @@ class AppConstants {
   static RegExp textRegExp = RegExp("[a-zA-Z]");
   static RegExp phoneRegExp = RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
 
-  static String clientID = "762812355330-nn0liimku3ot544gkpv8rptbm534hc7s.apps.googleusercontent.com";
+  static String clientID =
+      "762812355330-nn0liimku3ot544gkpv8rptbm534hc7s.apps.googleusercontent.com";
 
   static String categories = "categories";
   static String books = "books";

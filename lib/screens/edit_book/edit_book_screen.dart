@@ -81,6 +81,8 @@ class _EditBookScreenState extends State<EditBookScreen> {
                             onChanged: (v) {
                               bookName = v;
                             },
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
                               label: const Text(
                                 "BOOK NAME",
@@ -121,6 +123,8 @@ class _EditBookScreenState extends State<EditBookScreen> {
                             height: 24.h,
                           ),
                           TextFormField(
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
                             onChanged: (v) {
                               bookAuthor = v;
                             },
@@ -164,6 +168,8 @@ class _EditBookScreenState extends State<EditBookScreen> {
                             height: 24.h,
                           ),
                           TextFormField(
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
                             onChanged: (v) {
                               bookDescription = v;
                             },
@@ -207,6 +213,8 @@ class _EditBookScreenState extends State<EditBookScreen> {
                             height: 24.h,
                           ),
                           TextFormField(
+                            keyboardType: TextInputType.url,
+                            textInputAction: TextInputAction.next,
                             onChanged: (v) {
                               imageUrl = v;
                             },
@@ -250,6 +258,8 @@ class _EditBookScreenState extends State<EditBookScreen> {
                             height: 24.h,
                           ),
                           TextFormField(
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
                             onChanged: (v) {
                               rate = v;
                             },
@@ -293,6 +303,8 @@ class _EditBookScreenState extends State<EditBookScreen> {
                             height: 24.h,
                           ),
                           TextFormField(
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.done,
                             onChanged: (v) {
                               bookPrice = v;
                             },

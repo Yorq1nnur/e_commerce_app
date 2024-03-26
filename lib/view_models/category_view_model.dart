@@ -11,7 +11,7 @@ class CategoriesViewModel extends ChangeNotifier {
 
   List<CategoryModel> categories = [];
 
-  CategoriesViewModel(){
+  CategoriesViewModel() {
     getCategories();
   }
 
@@ -28,16 +28,16 @@ class CategoriesViewModel extends ChangeNotifier {
   }
 
   Stream<List<CategoryModel>> listenCategories() {
-    return  FirebaseFirestore.instance
+    return FirebaseFirestore.instance
         .collection(
-      AppConstants.categories,
-    )
+          AppConstants.categories,
+        )
         .snapshots()
         .map(
           (event) => event.docs
-          .map((doc) => CategoryModel.fromJson(doc.data()))
-          .toList(),
-    );
+              .map((doc) => CategoryModel.fromJson(doc.data()))
+              .toList(),
+        );
   }
 
   insertCategory(CategoryModel categoryModel, BuildContext context) async {

@@ -3,7 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LocalNotificationService {
   static final LocalNotificationService localNotificationService =
-  LocalNotificationService._();
+      LocalNotificationService._();
 
   factory LocalNotificationService() {
     return localNotificationService;
@@ -12,19 +12,19 @@ class LocalNotificationService {
   LocalNotificationService._();
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
   var initializationSettingsAndroid =
-  const AndroidInitializationSettings('app_icon');
+      const AndroidInitializationSettings('app_icon');
 
   void init() async {
     // Android
     const AndroidInitializationSettings androidInitializationSettings =
-    AndroidInitializationSettings("app_icon");
+        AndroidInitializationSettings("app_icon");
 
     //IOS
     final DarwinInitializationSettings initializationSettingsDarwin =
-    DarwinInitializationSettings(
+        DarwinInitializationSettings(
       onDidReceiveLocalNotification: onDidReceiveLocalNotification,
     );
 
@@ -46,12 +46,12 @@ class LocalNotificationService {
 
     final bool? result = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        IOSFlutterLocalNotificationsPlugin>()
+            IOSFlutterLocalNotificationsPlugin>()
         ?.requestPermissions(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
+          alert: true,
+          badge: true,
+          sound: true,
+        );
   }
 
   @pragma('vm:entry-point')
@@ -60,7 +60,7 @@ class LocalNotificationService {
   }
 
   AndroidNotificationChannel androidNotificationChannel =
-  const AndroidNotificationChannel(
+      const AndroidNotificationChannel(
     "my_channel",
     "Notification Lesson",
     importance: Importance.max,
@@ -68,10 +68,12 @@ class LocalNotificationService {
   );
 
   //IOS
-  void onDidReceiveLocalNotification(int id,
-      String? title,
-      String? body,
-      String? payload,) async {
+  void onDidReceiveLocalNotification(
+    int id,
+    String? title,
+    String? body,
+    String? payload,
+  ) async {
     debugPrint(payload);
   }
 
