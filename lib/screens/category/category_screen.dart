@@ -3,6 +3,7 @@ import 'package:e_commerce_app/data/models/book_model.dart';
 import 'package:e_commerce_app/data/models/category_model.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
 import 'package:e_commerce_app/view_models/books_view_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -91,7 +92,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           ),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(
@@ -104,41 +105,56 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "BOOK NAME:",
-                                  style: AppTextStyle.interBold.copyWith(
-                                    color: Colors.black,
-                                    fontSize: 20.sp,
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "BOOK NAME:",
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: AppTextStyle.interBold.copyWith(
+                                      color: Colors.black,
+                                      fontSize: 18.sp,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  book.bookName,
-                                  style: AppTextStyle.interBold.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 16.sp,
+                                  Text(
+                                    book.bookName,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: AppTextStyle.interBold.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 16.sp,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 5.h,),
-                                Text(
-                                  "BOOK AUTHOR:",
-                                  style: AppTextStyle.interBold.copyWith(
-                                    color: Colors.black,
-                                    fontSize: 20.sp,
+                                  SizedBox(
+                                    height: 5.h,
                                   ),
-                                ),
-                                Text(
-                                  book.bookName,
-                                  style: AppTextStyle.interBold.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 16.sp,
+                                  Text(
+                                    "BOOK AUTHOR:",
+                                    style: AppTextStyle.interBold.copyWith(
+                                      color: Colors.black,
+                                      fontSize: 18.sp,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                              ],
+                                  Text(
+                                    book.bookAuthor,
+                                    style: AppTextStyle.interBold.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 16.sp,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
                             )
                           ],
                         ),
