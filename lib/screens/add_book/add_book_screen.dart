@@ -3,8 +3,10 @@ import 'package:e_commerce_app/data/models/category_model.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
 import 'package:e_commerce_app/view_models/books_view_model.dart';
 import 'package:e_commerce_app/view_models/category_view_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
@@ -34,8 +36,6 @@ class _AddBookScreenState extends State<AddBookScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<CategoryModel> categories =
-        context.watch<CategoriesViewModel>().categories;
     String categoryDocId = '';
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
@@ -67,221 +67,261 @@ class _AddBookScreenState extends State<AddBookScreen> {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-            vertical: 20.h,
+          padding: EdgeInsets.only(
+            bottom: 20.h,
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextFormField(
-                controller: bookNameController,
-                decoration: InputDecoration(
-                  label: const Text(
-                    "BOOK NAME",
-                  ),
-                  labelStyle: AppTextStyle.interBold.copyWith(
-                    fontSize: 10.sp,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.black54,
-                      width: 2.w,
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 2.w,
-                    ),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 2.w,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 24.h,
-              ),
-              TextFormField(
-                controller: bookDescriptionController,
-                decoration: InputDecoration(
-                  label: const Text(
-                    "BOOK DESCRIPTION",
-                  ),
-                  labelStyle: AppTextStyle.interBold.copyWith(
-                    fontSize: 10.sp,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.black54,
-                      width: 2.w,
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 2.w,
-                    ),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 2.w,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 24.h,
-              ),
-              TextFormField(
-                controller: imageUrlController,
-                decoration: InputDecoration(
-                  label: const Text(
-                    "IMAGE URL",
-                  ),
-                  labelStyle: AppTextStyle.interBold.copyWith(
-                    fontSize: 10.sp,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.black54,
-                      width: 2.w,
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 2.w,
-                    ),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 2.w,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 24.h,
-              ),
-              TextFormField(
-                controller: priceController,
-                decoration: InputDecoration(
-                  label: const Text(
-                    "BOOK'S PRICE",
-                  ),
-                  labelStyle: AppTextStyle.interBold.copyWith(
-                    fontSize: 10.sp,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.black54,
-                      width: 2.w,
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 2.w,
-                    ),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 2.w,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 24.h,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ...List.generate(
-                      categories.length,
-                      (index) => ZoomTapAnimation(
-                        child: Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 5.w,
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 5.w,
-                            vertical: 5.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(
-                              16.r,
+              Expanded(
+                flex: 8,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20.w,
+                          vertical: 20.h,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            TextFormField(
+                              controller: bookNameController,
+                              decoration: InputDecoration(
+                                label: const Text(
+                                  "BOOK NAME",
+                                ),
+                                labelStyle: AppTextStyle.interBold.copyWith(
+                                  fontSize: 10.sp,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.black54,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                          child: Center(
-                            child: Text(categories[index].categoryName),
-                          ),
+                            SizedBox(
+                              height: 24.h,
+                            ),
+                            TextFormField(
+                              controller: bookDescriptionController,
+                              decoration: InputDecoration(
+                                label: const Text(
+                                  "BOOK DESCRIPTION",
+                                ),
+                                labelStyle: AppTextStyle.interBold.copyWith(
+                                  fontSize: 10.sp,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.black54,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 24.h,
+                            ),
+                            TextFormField(
+                              controller: imageUrlController,
+                              decoration: InputDecoration(
+                                label: const Text(
+                                  "IMAGE URL",
+                                ),
+                                labelStyle: AppTextStyle.interBold.copyWith(
+                                  fontSize: 10.sp,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.black54,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 24.h,
+                            ),
+                            TextFormField(
+                              controller: priceController,
+                              decoration: InputDecoration(
+                                label: const Text(
+                                  "BOOK'S PRICE",
+                                ),
+                                labelStyle: AppTextStyle.interBold.copyWith(
+                                  fontSize: 10.sp,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.black54,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        child: StreamBuilder<List<CategoryModel>>(
+                          stream:
+                              context.read<CategoriesViewModel>().listenCategories(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return Center(
+                                child: Text(snapshot.error.toString()),
+                              );
+                            }
+                            if (snapshot.hasData) {
+                              List<CategoryModel> list =
+                                  snapshot.data as List<CategoryModel>;
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  ...List.generate(
+                                    list.length,
+                                    (index) => ZoomTapAnimation(
+                                      onTap: (){
+                                        categoryDocId = list[index].docId;
+                                        debugPrint(categoryDocId);
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal: 5.w,
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 5.w,
+                                          vertical: 5.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue,
+                                          borderRadius: BorderRadius.circular(
+                                            16.r,
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Text(list[index].categoryName),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              );
+                            }
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const Spacer(),
               ZoomTapAnimation(
                 onTap: () async {
-                  if (bookNameController.text != "" &&
-                      imageUrlController.text != "") {
+                  if (priceController.text != "" &&
+                      imageUrlController.text != "" && bookDescriptionController.text != '' && bookNameController.text != '' && categoryDocId != '') {
                     BookModel category = BookModel(
                       price: double.parse(priceController.text),
                       imageUrl: imageUrlController.text,
                       bookName: bookNameController.text,
                       docId: "",
                       bookDescription: bookDescriptionController.text,
-                      categoryId: 'CA3vYM1p3tWothX86QUN',
+                      categoryId: categoryDocId,
                     );
                     await context
                         .read<BooksViewModel>()
@@ -290,11 +330,11 @@ class _AddBookScreenState extends State<AddBookScreen> {
                     Navigator.pop(context);
                     if (!context.mounted) return;
                     context.read<NotificationsViewModel>().showNotifications(
-                          title:
-                              "${bookNameController.text} NOMLI YANGI KITOB QO'SHILDI!!!",
-                          body: bookDescriptionController.text,
-                          id: DateTime.now().millisecond,
-                        );
+                      title:
+                      "${bookNameController.text} NOMLI YANGI KITOB QO'SHILDI!!!",
+                      body: bookDescriptionController.text,
+                      id: DateTime.now().millisecond,
+                    );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
