@@ -1,5 +1,7 @@
+import 'package:e_commerce_app/data/models/book_model.dart';
 import 'package:e_commerce_app/data/models/category_model.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
+import 'package:e_commerce_app/view_models/books_view_model.dart';
 import 'package:e_commerce_app/view_models/category_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,6 +34,9 @@ class _AddBookScreenState extends State<AddBookScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<CategoryModel> categories =
+        context.watch<CategoriesViewModel>().categories;
+    String categoryDocId = '';
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
@@ -233,27 +238,63 @@ class _AddBookScreenState extends State<AddBookScreen> {
               SizedBox(
                 height: 24.h,
               ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ...List.generate(
+                      categories.length,
+                      (index) => ZoomTapAnimation(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 5.w,
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 5.w,
+                            vertical: 5.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(
+                              16.r,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(categories[index].categoryName),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               const Spacer(),
               ZoomTapAnimation(
                 onTap: () async {
                   if (bookNameController.text != "" &&
                       imageUrlController.text != "") {
-                    CategoryModel category = CategoryModel(
+                    BookModel category = BookModel(
+                      price: double.parse(priceController.text),
                       imageUrl: imageUrlController.text,
-                      categoryName: bookNameController.text,
+                      bookName: bookNameController.text,
                       docId: "",
+                      bookDescription: bookDescriptionController.text,
+                      categoryId: 'CA3vYM1p3tWothX86QUN',
                     );
                     await context
-                        .read<CategoriesViewModel>()
-                        .insertCategory(category, context);
+                        .read<BooksViewModel>()
+                        .insertProducts(category, context);
                     if (!context.mounted) return;
                     Navigator.pop(context);
                     if (!context.mounted) return;
                     context.read<NotificationsViewModel>().showNotifications(
-                      title: "${bookNameController.text} NOMLI YANGI KITOB QO'SHILDI!!!",
-                      body: bookDescriptionController.text,
-                      id: DateTime.now().millisecond,
-                    );
+                          title:
+                              "${bookNameController.text} NOMLI YANGI KITOB QO'SHILDI!!!",
+                          body: bookDescriptionController.text,
+                          id: DateTime.now().millisecond,
+                        );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(

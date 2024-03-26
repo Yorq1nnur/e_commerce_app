@@ -10,7 +10,7 @@ import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../../data/models/book_model.dart';
 import '../../../utils/colors/app_colors.dart';
 import '../../../view_models/notifications_view_model.dart';
-import '../../../view_models/products_view_model.dart';
+import '../../../view_models/books_view_model.dart';
 import '../../book_details/book_details_screen.dart';
 
 class BooksScreen extends StatefulWidget {

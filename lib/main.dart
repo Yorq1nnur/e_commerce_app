@@ -4,7 +4,7 @@ import 'package:e_commerce_app/services/local_notification_service.dart';
 import 'package:e_commerce_app/view_models/auth_view_model.dart';
 import 'package:e_commerce_app/view_models/category_view_model.dart';
 import 'package:e_commerce_app/view_models/notifications_view_model.dart';
-import 'package:e_commerce_app/view_models/products_view_model.dart';
+import 'package:e_commerce_app/view_models/books_view_model.dart';
 import 'package:e_commerce_app/view_models/tab_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

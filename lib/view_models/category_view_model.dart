@@ -24,7 +24,9 @@ class CategoriesViewModel extends ChangeNotifier {
   }
 
   Stream<List<CategoryModel>> listenCategories() => FirebaseFirestore.instance
-      .collection(AppConstants.categories)
+      .collection(
+        AppConstants.categories,
+      )
       .snapshots()
       .map(
         (event) => event.docs
