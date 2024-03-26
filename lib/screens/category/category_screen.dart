@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app/data/models/book_model.dart';
 import 'package:e_commerce_app/data/models/category_model.dart';
+import 'package:e_commerce_app/screens/book_details/book_details_screen.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
 import 'package:e_commerce_app/view_models/books_view_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -75,88 +75,100 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     list.length,
                     (index) {
                       BookModel book = list[index];
-                      return Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10.h,
-                          vertical: 10.h,
-                        ),
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 10.w,
-                          vertical: 10.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.amberAccent.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(
-                            16.r,
+                      return ZoomTapAnimation(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BookDetailsScreen(
+                                bookModel: book,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10.h,
+                            vertical: 10.h,
                           ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                16.r,
-                              ),
-                              child: CachedNetworkImage(
-                                imageUrl: book.imageUrl,
-                                height: 200.h,
-                                width: 150.w,
-                                fit: BoxFit.cover,
-                              ),
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 10.w,
+                            vertical: 10.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.amberAccent.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(
+                              16.r,
                             ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "BOOK NAME:",
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: AppTextStyle.interBold.copyWith(
-                                      color: Colors.black,
-                                      fontSize: 18.sp,
-                                    ),
-                                  ),
-                                  Text(
-                                    book.bookName,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: AppTextStyle.interBold.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 16.sp,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5.h,
-                                  ),
-                                  Text(
-                                    "BOOK AUTHOR:",
-                                    style: AppTextStyle.interBold.copyWith(
-                                      color: Colors.black,
-                                      fontSize: 18.sp,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Text(
-                                    book.bookAuthor,
-                                    style: AppTextStyle.interBold.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 16.sp,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                  16.r,
+                                ),
+                                child: CachedNetworkImage(
+                                  imageUrl: book.imageUrl,
+                                  height: 200.h,
+                                  width: 150.w,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            )
-                          ],
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "BOOK NAME:",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: AppTextStyle.interBold.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 18.sp,
+                                      ),
+                                    ),
+                                    Text(
+                                      book.bookName,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: AppTextStyle.interBold.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 16.sp,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    Text(
+                                      "BOOK AUTHOR:",
+                                      style: AppTextStyle.interBold.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 18.sp,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      book.bookAuthor,
+                                      style: AppTextStyle.interBold.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 16.sp,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       );
                     },
