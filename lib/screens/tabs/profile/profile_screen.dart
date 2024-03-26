@@ -85,36 +85,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     );
                   },
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 24.h,
-
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                  ),
-                  child: ZoomTapAnimation(
-                    onTap: (){
-                      context.read<NotificationsViewModel>().cancelAllNotifications();
-                    },
-                    child: Center(
-                      child: Text(
-                        "CANCEL ALL NOTIFICATIONS",
-                        style: AppTextStyle.interBold.copyWith(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w900,
+                indexes.isNotEmpty
+                    ? Container(
+                        margin: EdgeInsets.symmetric(
+                          vertical: 24.h,
                         ),
-                      ),
-                    ),
-                  ),
-                )
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(
+                            16.r,
+                          ),
+                        ),
+                        child: ZoomTapAnimation(
+                          onTap: () {
+                            context
+                                .read<NotificationsViewModel>()
+                                .cancelAllNotifications();
+                          },
+                          child: Center(
+                            child: Text(
+                              "CANCEL ALL NOTIFICATIONS",
+                              style: AppTextStyle.interBold.copyWith(
+                                color: Colors.white,
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
               ],
             ),
           ),
