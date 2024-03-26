@@ -10,6 +10,7 @@ import '../../data/models/category_model.dart';
 import '../../utils/colors/app_colors.dart';
 import '../../view_models/category_view_model.dart';
 import '../../view_models/notifications_view_model.dart';
+import '../add_book/widgets/category_button.dart';
 
 class EditBookScreen extends StatefulWidget {
   const EditBookScreen({
@@ -22,7 +23,7 @@ class EditBookScreen extends StatefulWidget {
   @override
   State<EditBookScreen> createState() => _EditBookScreenState();
 }
-
+int activeIndex = -1;
 class _EditBookScreenState extends State<EditBookScreen> {
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,7 @@ class _EditBookScreenState extends State<EditBookScreen> {
     String rate = '';
     String bookAuthor = '';
     String categoryDocId = '';
+
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
@@ -388,29 +390,17 @@ class _EditBookScreenState extends State<EditBookScreen> {
                               children: [
                                 ...List.generate(
                                   list.length,
-                                  (index) => ZoomTapAnimation(
+                                  (index) => CategoryButton(
+                                    title: list[index].categoryName,
                                     onTap: () {
+                                      debugPrint("\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
                                       categoryDocId = list[index].docId;
                                       debugPrint(categoryDocId);
+                                      setState(() {
+                                        activeIndex = index;
+                                      });
                                     },
-                                    child: Container(
-                                      margin: EdgeInsets.symmetric(
-                                        horizontal: 5.w,
-                                      ),
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 5.w,
-                                        vertical: 5.h,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(
-                                          16.r,
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(list[index].categoryName),
-                                      ),
-                                    ),
+                                    isActive: activeIndex == index,
                                   ),
                                 )
                               ],

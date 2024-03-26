@@ -74,6 +74,8 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextFormField(
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
                 onChanged: (v) {
                   categoryName = v;
                 },
@@ -118,6 +120,8 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
                 height: 24.h,
               ),
               TextFormField(
+                keyboardType: TextInputType.url,
+                textInputAction: TextInputAction.done,
                 onChanged: (v) {
                   imageUrl = v;
                 },

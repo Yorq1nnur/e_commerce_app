@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app/screens/edit_book/edit_book_screen.dart';
 import 'package:e_commerce_app/screens/routes.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
