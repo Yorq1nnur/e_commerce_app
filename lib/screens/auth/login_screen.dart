@@ -31,6 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String email = '';
+    String password = '';
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
@@ -61,11 +63,29 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: 20.h,
                     ),
-MyTextField(textEditingController: emailController, labelText: "EMAIL", textInputAction: TextInputAction.next, textInputType: TextInputType.emailAddress, imagePath: AppImages.email,),
+                    MyTextField(
+                      onChanged: (v) {
+                        email = v;
+                      },
+                      textEditingController: emailController,
+                      labelText: "EMAIL",
+                      textInputAction: TextInputAction.next,
+                      textInputType: TextInputType.emailAddress,
+                      imagePath: AppImages.email,
+                    ),
                     SizedBox(
                       height: 24.h,
                     ),
-                    MyTextField(textEditingController: passwordController, labelText: "PASSWORD", textInputAction: TextInputAction.done, textInputType: TextInputType.visiblePassword, imagePath: AppImages.lock,),
+                    MyTextField(
+                      onChanged: (v) {
+                        password = v;
+                      },
+                      textEditingController: passwordController,
+                      labelText: "PASSWORD",
+                      textInputAction: TextInputAction.done,
+                      textInputType: TextInputType.visiblePassword,
+                      imagePath: AppImages.lock,
+                    ),
                     Container(
                       height: 60.h,
                       width: double.infinity,
@@ -86,8 +106,8 @@ MyTextField(textEditingController: emailController, labelText: "EMAIL", textInpu
                         onPressed: () {
                           context.read<AuthViewModel>().loginUser(
                                 context,
-                                email: emailController.text,
-                                password: passwordController.text,
+                                email: email,
+                                password: password,
                               );
                         },
                         child: Text(

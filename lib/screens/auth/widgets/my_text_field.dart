@@ -10,6 +10,7 @@ class MyTextField extends StatelessWidget {
     required this.textInputAction,
     required this.textInputType,
     required this.imagePath,
+    required this.onChanged,
   });
 
   final TextEditingController textEditingController;
@@ -17,10 +18,12 @@ class MyTextField extends StatelessWidget {
   final String imagePath;
   final TextInputAction textInputAction;
   final TextInputType textInputType;
+  final ValueChanged onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       textInputAction: textInputAction,
       controller: textEditingController,
       decoration: InputDecoration(

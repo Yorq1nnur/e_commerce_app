@@ -31,6 +31,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String email = '';
+    String password = '';
+    String userName = '';
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
@@ -67,6 +70,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: 32.h,
                     ),
                     MyTextField(
+                      onChanged: (v){
+                        email = v;
+                      },
                       textEditingController: emailController,
                       labelText: "EMAIL",
                       textInputAction: TextInputAction.next,
@@ -77,6 +83,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: 24.h,
                     ),
                     MyTextField(
+                      onChanged: (v){
+                        userName = v;
+                      },
                       textEditingController: usernameController,
                       labelText: "USER NAME",
                       textInputAction: TextInputAction.next,
@@ -87,6 +96,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: 24.h,
                     ),
                     MyTextField(
+                      onChanged: (v){
+                        password = v;
+                      },
                       textEditingController: passwordController,
                       labelText: "PASSWORD",
                       textInputAction: TextInputAction.done,
@@ -111,9 +123,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () {
                           context.read<AuthViewModel>().registerUser(
                                 context,
-                                email: emailController.text,
-                                password: passwordController.text,
-                                username: usernameController.text,
+                                email: email,
+                                password: password,
+                                username: userName,
                               );
                         },
                         child: Text(
