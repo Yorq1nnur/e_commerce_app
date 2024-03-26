@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/data/models/book_model.dart';
 import 'package:e_commerce_app/data/models/category_model.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
 import 'package:e_commerce_app/view_models/category_view_model.dart';
@@ -9,19 +10,19 @@ import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../utils/colors/app_colors.dart';
 import '../../view_models/notifications_view_model.dart';
 
-class EditCategoryScreen extends StatefulWidget {
-  const EditCategoryScreen({
+class EditBookScreen extends StatefulWidget {
+  const EditBookScreen({
     super.key,
-    required this.categoryModel,
+    required this.bookModel,
   });
 
-  final CategoryModel categoryModel;
+  final BookModel bookModel;
 
   @override
-  State<EditCategoryScreen> createState() => _EditCategoryScreenState();
+  State<EditBookScreen> createState() => _EditBookScreenState();
 }
 
-class _EditCategoryScreenState extends State<EditCategoryScreen> {
+class _EditBookScreenState extends State<EditBookScreen> {
   final TextEditingController categoryNameController = TextEditingController();
   final TextEditingController imageUrlController = TextEditingController();
 
@@ -34,7 +35,7 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String categoryName = '';
+    String bookName = '';
     String imageUrl = '';
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
@@ -75,7 +76,7 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
             children: [
               TextFormField(
                 onChanged: (v){
-                  categoryName = v;
+                  bookName = v;
                 },
                 controller: categoryNameController,
                 decoration: InputDecoration(
@@ -162,9 +163,9 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
               ZoomTapAnimation(
                 onTap: () async {
                   CategoryModel category = CategoryModel(
-                    imageUrl: imageUrl == "" ? widget.categoryModel.imageUrl : imageUrl,
-                    categoryName: categoryName == "" ? widget.categoryModel.categoryName : categoryName,
-                    docId: widget.categoryModel.docId,
+                    imageUrl: imageUrl == "" ? widget.bookModel.imageUrl : imageUrl,
+                    categoryName: bookName == "" ? widget.bookModel.bookName : bookName,
+                    docId: widget.bookModel.docId,
                   );
                   await context
                       .read<CategoriesViewModel>()

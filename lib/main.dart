@@ -22,7 +22,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => TabViewModel()),
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
         ChangeNotifierProvider(create: (_) => CategoriesViewModel()),
-        ChangeNotifierProvider(create: (_) => ProductsViewModel()),
+        ChangeNotifierProvider(create: (_) => BooksViewModel()),
         ChangeNotifierProvider(create: (_) => NotificationsViewModel()),
       ],
       child: const MyApp(),

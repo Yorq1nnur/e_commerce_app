@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../utils/colors/app_colors.dart';
+import '../../view_models/notifications_view_model.dart';
 
 class AddBookScreen extends StatefulWidget {
   const AddBookScreen({super.key});
@@ -232,7 +233,6 @@ class _AddBookScreenState extends State<AddBookScreen> {
               SizedBox(
                 height: 24.h,
               ),
-
               const Spacer(),
               ZoomTapAnimation(
                 onTap: () async {
@@ -248,12 +248,21 @@ class _AddBookScreenState extends State<AddBookScreen> {
                         .insertCategory(category, context);
                     if (!context.mounted) return;
                     Navigator.pop(context);
+                    if (!context.mounted) return;
+                    context.read<NotificationsViewModel>().showNotifications(
+                      title: "${bookNameController.text} NOMLI YANGI KITOB QO'SHILDI!!!",
+                      body: bookDescriptionController.text,
+                      id: DateTime.now().millisecond,
+                    );
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
                         content: Text(
-                      "PLEASE COMPLETE ALL DETAILS",
-                      textAlign: TextAlign.center,
-                    )));
+                          "PLEASE COMPLETE ALL DETAILS",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
                   }
                 },
                 child: Container(

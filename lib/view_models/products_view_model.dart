@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../utils/utility_functions.dart';
 
-class ProductsViewModel extends ChangeNotifier {
+class BooksViewModel extends ChangeNotifier {
   bool _isLoading = false;
 
   bool get getLoader => _isLoading;

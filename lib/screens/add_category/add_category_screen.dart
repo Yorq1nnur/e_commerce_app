@@ -161,7 +161,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                         );
                     if (!context.mounted) return;
                     context.read<NotificationsViewModel>().showNotifications(
-                          title: "YANGI KATEGORIYA QO'SHILDI!!!",
+                          title: "${categoryNameController.text} NOMLI YANGI KATEGORIYA QO'SHILDI!!!",
                           body: categoryNameController.text,
                           id: DateTime.now().millisecond,
                         );

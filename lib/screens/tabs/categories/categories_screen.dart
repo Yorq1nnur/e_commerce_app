@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../../data/models/category_model.dart';
 import '../../../view_models/category_view_model.dart';
+import '../../../view_models/notifications_view_model.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
@@ -152,6 +153,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                                   list[index].docId,
                                                   context,
                                                 );
+                                            if (!context.mounted) return;
+                                            context.read<NotificationsViewModel>().showNotifications(
+                                              title: "${list[index].categoryName} NOMLI YANGI KATEGORIYA QO'SHILDI!!!",
+                                              body: list[index].categoryName,
+                                              id: DateTime.now().millisecond,
+                                            );
                                             Navigator.pop(context);
                                           },
                                           child: Text(
