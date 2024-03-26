@@ -91,6 +91,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               MaterialPageRoute(
                                 builder: (context) => CategoryScreen(
                                   categoryModel: list[index],
+                                  categoryDocId: list[index].docId,
                                 ),
                               ),
                             );
@@ -98,7 +99,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           child: CachedNetworkImage(
                             imageUrl: list[index].imageUrl,
                             height: 200.h,
-                            width: 150.w,
+                            width: double.infinity,
                             fit: BoxFit.cover,
                           ),
                         ),

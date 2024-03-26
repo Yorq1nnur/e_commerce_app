@@ -1,6 +1,8 @@
 class BookModel {
   final String docId;
   final String bookName;
+  final String bookAuthor;
+  final String rate;
   final String bookDescription;
   final double price;
   final String imageUrl;
@@ -13,6 +15,8 @@ class BookModel {
     required this.docId,
     required this.bookDescription,
     required this.categoryId,
+    required this.rate,
+    required this.bookAuthor,
   });
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +27,8 @@ class BookModel {
       bookName: json["product_name"] as String? ?? "",
       bookDescription: json["product_description"] as String? ?? "",
       price: json["price"] as double? ?? 0.0,
+      rate: json["rate"] as String? ?? "",
+      bookAuthor: json["book_author"] as String? ?? "",
     );
   }
 
@@ -34,6 +40,8 @@ class BookModel {
       "product_description": bookDescription,
       "price": price,
       "category_id": categoryId,
+      "rate": rate,
+      "book_author": bookAuthor
     };
   }
 
@@ -44,6 +52,8 @@ class BookModel {
       "product_description": bookDescription,
       "price": price,
       "category_id": categoryId,
+      "rate": rate,
+      "book_author": bookAuthor
     };
   }
 }

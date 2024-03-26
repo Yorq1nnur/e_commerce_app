@@ -108,7 +108,7 @@ class _BooksScreenState extends State<BooksScreen> {
                             child: CachedNetworkImage(
                               imageUrl: list[index].imageUrl,
                               height: 200.h,
-                              width: 150.w,
+                              width: double.infinity,
                               fit: BoxFit.cover,
                             ),
                           ),

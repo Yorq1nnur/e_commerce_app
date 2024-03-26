@@ -1,8 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerce_app/data/models/book_model.dart';
 import 'package:e_commerce_app/data/models/category_model.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
+import 'package:e_commerce_app/view_models/books_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../utils/colors/app_colors.dart';
 
@@ -10,16 +14,17 @@ class CategoryScreen extends StatefulWidget {
   const CategoryScreen({
     super.key,
     required this.categoryModel,
+    required this.categoryDocId,
   });
 
   final CategoryModel categoryModel;
+  final String categoryDocId;
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -50,6 +55,103 @@ class _CategoryScreenState extends State<CategoryScreen> {
               fontWeight: FontWeight.w900,
             ),
           ),
+        ),
+        body: StreamBuilder<List<BookModel>>(
+          stream: context
+              .read<BooksViewModel>()
+              .listenProductsByCategory(categoryDocId: widget.categoryDocId),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            }
+            if (snapshot.hasData) {
+              List<BookModel> list = snapshot.data as List<BookModel>;
+              return ListView(
+                children: [
+                  ...List.generate(
+                    list.length,
+                    (index) {
+                      BookModel book = list[index];
+                      return Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.h,
+                          vertical: 10.h,
+                        ),
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                          vertical: 10.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.amberAccent.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(
+                            16.r,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                16.r,
+                              ),
+                              child: CachedNetworkImage(
+                                imageUrl: book.imageUrl,
+                                height: 200.h,
+                                width: 150.w,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "BOOK NAME:",
+                                  style: AppTextStyle.interBold.copyWith(
+                                    color: Colors.black,
+                                    fontSize: 20.sp,
+                                  ),
+                                ),
+                                Text(
+                                  book.bookName,
+                                  style: AppTextStyle.interBold.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 16.sp,
+                                  ),
+                                ),
+                                SizedBox(height: 5.h,),
+                                Text(
+                                  "BOOK AUTHOR:",
+                                  style: AppTextStyle.interBold.copyWith(
+                                    color: Colors.black,
+                                    fontSize: 20.sp,
+                                  ),
+                                ),
+                                Text(
+                                  book.bookName,
+                                  style: AppTextStyle.interBold.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 16.sp,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
         ),
       ),
     );

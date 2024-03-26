@@ -3,10 +3,8 @@ import 'package:e_commerce_app/data/models/category_model.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
 import 'package:e_commerce_app/view_models/books_view_model.dart';
 import 'package:e_commerce_app/view_models/category_view_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
@@ -26,6 +24,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
       TextEditingController();
   final TextEditingController imageUrlController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
+  final TextEditingController rateController = TextEditingController();
+  final TextEditingController bookAuthorController = TextEditingController();
 
   @override
   void dispose() {
@@ -73,7 +73,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
           child: Column(
             children: [
               Expanded(
-                flex: 8,
+                flex: 10,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   physics: const BouncingScrollPhysics(),
@@ -93,6 +93,47 @@ class _AddBookScreenState extends State<AddBookScreen> {
                               decoration: InputDecoration(
                                 label: const Text(
                                   "BOOK NAME",
+                                ),
+                                labelStyle: AppTextStyle.interBold.copyWith(
+                                  fontSize: 10.sp,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.black54,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 24.h,
+                            ),
+                            TextFormField(
+                              controller: bookAuthorController,
+                              decoration: InputDecoration(
+                                label: const Text(
+                                  "BOOK AUTHOR",
                                 ),
                                 labelStyle: AppTextStyle.interBold.copyWith(
                                   fontSize: 10.sp,
@@ -212,6 +253,47 @@ class _AddBookScreenState extends State<AddBookScreen> {
                               height: 24.h,
                             ),
                             TextFormField(
+                              controller: rateController,
+                              decoration: InputDecoration(
+                                label: const Text(
+                                  "BOOK'S RATE",
+                                ),
+                                labelStyle: AppTextStyle.interBold.copyWith(
+                                  fontSize: 10.sp,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.black54,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    16.r,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.w,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 24.h,
+                            ),
+                            TextFormField(
                               controller: priceController,
                               decoration: InputDecoration(
                                 label: const Text(
@@ -252,12 +334,27 @@ class _AddBookScreenState extends State<AddBookScreen> {
                           ],
                         ),
                       ),
+                      Center(
+                        child: Text(
+                          "PLEASE, SELECT CATEGORY:",
+                          textAlign: TextAlign.center,
+                          style: AppTextStyle.interBold.copyWith(
+                            color: AppColors.black,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         physics: const BouncingScrollPhysics(),
                         child: StreamBuilder<List<CategoryModel>>(
-                          stream:
-                              context.read<CategoriesViewModel>().listenCategories(),
+                          stream: context
+                              .read<CategoriesViewModel>()
+                              .listenCategories(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
                               return Center(
@@ -273,7 +370,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                                   ...List.generate(
                                     list.length,
                                     (index) => ZoomTapAnimation(
-                                      onTap: (){
+                                      onTap: () {
                                         categoryDocId = list[index].docId;
                                         debugPrint(categoryDocId);
                                       },
@@ -314,10 +411,17 @@ class _AddBookScreenState extends State<AddBookScreen> {
               ZoomTapAnimation(
                 onTap: () async {
                   if (priceController.text != "" &&
-                      imageUrlController.text != "" && bookDescriptionController.text != '' && bookNameController.text != '' && categoryDocId != '') {
+                      imageUrlController.text != "" &&
+                      bookDescriptionController.text != '' &&
+                      bookNameController.text != '' &&
+                      categoryDocId != '' &&
+                      rateController.text != '' &&
+                      bookAuthorController.text != '') {
                     BookModel category = BookModel(
                       price: double.parse(priceController.text),
                       imageUrl: imageUrlController.text,
+                      rate: rateController.text,
+                      bookAuthor: bookAuthorController.text,
                       bookName: bookNameController.text,
                       docId: "",
                       bookDescription: bookDescriptionController.text,
@@ -330,11 +434,11 @@ class _AddBookScreenState extends State<AddBookScreen> {
                     Navigator.pop(context);
                     if (!context.mounted) return;
                     context.read<NotificationsViewModel>().showNotifications(
-                      title:
-                      "${bookNameController.text} NOMLI YANGI KITOB QO'SHILDI!!!",
-                      body: bookDescriptionController.text,
-                      id: DateTime.now().millisecond,
-                    );
+                          title:
+                              "${bookNameController.text} NOMLI YANGI KITOB QO'SHILDI!!!",
+                          body: bookDescriptionController.text,
+                          id: DateTime.now().millisecond,
+                        );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
