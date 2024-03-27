@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/screens/add_book/add_book_screen.dart';
 import 'package:e_commerce_app/screens/add_category/add_category_screen.dart';
+import 'package:e_commerce_app/screens/news/news_screen.dart';
 import 'package:e_commerce_app/screens/splash/splash_screen.dart';
 import 'package:e_commerce_app/screens/tabs/tab_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,23 +8,41 @@ import 'auth/login_screen.dart';
 import 'auth/register_screen.dart';
 
 class AppRoutes {
-  static Route generateRoute(RouteSettings settings) {
+  static Route generateRoute(
+    RouteSettings settings,
+  ) {
     switch (settings.name) {
       case RouteNames.splashScreen:
-        return navigate(const SplashScreen());
+        return navigate(
+          const SplashScreen(),
+        );
 
       case RouteNames.tabRoute:
-        return navigate(const TabScreen());
+        return navigate(
+          const TabScreen(),
+        );
 
       case RouteNames.loginRoute:
-        return navigate(const LoginScreen());
+        return navigate(
+          const LoginScreen(),
+        );
 
       case RouteNames.registerRoute:
-        return navigate(const RegisterScreen());
+        return navigate(
+          const RegisterScreen(),
+        );
       case RouteNames.addCategoryRoute:
-        return navigate(const AddCategoryScreen());
+        return navigate(
+          const AddCategoryScreen(),
+        );
       case RouteNames.addBookRoute:
-        return navigate(const AddBookScreen());
+        return navigate(
+          const AddBookScreen(),
+        );
+      case RouteNames.newsRoute:
+        return navigate(
+          const NewsScreen(),
+        );
 
       default:
         return navigate(
@@ -36,8 +55,12 @@ class AppRoutes {
     }
   }
 
-  static navigate(Widget widget) {
-    return MaterialPageRoute(builder: (context) => widget);
+  static navigate(
+    Widget widget,
+  ) {
+    return MaterialPageRoute(
+      builder: (context) => widget,
+    );
   }
 }
 
@@ -48,4 +71,5 @@ class RouteNames {
   static const String registerRoute = "/register_route";
   static const String addCategoryRoute = "/add_category_route";
   static const String addBookRoute = "/add_book_route";
+  static const String newsRoute = "/news_route";
 }

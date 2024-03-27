@@ -62,8 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 20.h,
                     ),
                     MyTextField(
-                      onChanged: (v) {
-                      },
+                      onChanged: (v) {},
                       textEditingController: emailController,
                       labelText: "EMAIL",
                       textInputAction: TextInputAction.next,
@@ -74,8 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 24.h,
                     ),
                     MyTextField(
-                      onChanged: (v) {
-                      },
+                      onChanged: (v) {},
                       textEditingController: passwordController,
                       labelText: "PASSWORD",
                       textInputAction: TextInputAction.done,
@@ -99,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        onPressed: () async{
+                        onPressed: () async {
                           await context.read<AuthViewModel>().loginUser(
                                 context,
                                 email: emailController.text,

@@ -67,8 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: 32.h,
                     ),
                     MyTextField(
-                      onChanged: (v) {
-                      },
+                      onChanged: (v) {},
                       textEditingController: emailController,
                       labelText: "EMAIL",
                       textInputAction: TextInputAction.next,
@@ -79,8 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: 24.h,
                     ),
                     MyTextField(
-                      onChanged: (v) {
-                      },
+                      onChanged: (v) {},
                       textEditingController: usernameController,
                       labelText: "USER NAME",
                       textInputAction: TextInputAction.next,
@@ -91,8 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: 24.h,
                     ),
                     MyTextField(
-                      onChanged: (v) {
-                      },
+                      onChanged: (v) {},
                       textEditingController: passwordController,
                       labelText: "PASSWORD",
                       textInputAction: TextInputAction.done,

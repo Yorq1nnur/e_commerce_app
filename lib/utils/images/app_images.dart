@@ -5,6 +5,7 @@ class AppImages {
   static const String back = "assets/images/back.png";
   //.svg
   static const String email = "assets/icons/email.svg";
+  static const String news = "assets/icons/news.svg";
   static const String lock = "assets/icons/lock.svg";
   static const String shelf = "assets/icons/shelf.svg";
   static const String user = "assets/icons/user.svg";

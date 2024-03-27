@@ -1,8 +1,10 @@
-import 'package:e_commerce_app/view_models/auth_view_model.dart';
+import 'package:e_commerce_app/screens/routes.dart';
+import 'package:e_commerce_app/utils/images/app_images.dart';
 import 'package:e_commerce_app/view_models/notifications_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../../utils/colors/app_colors.dart';
@@ -34,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           elevation: 0,
           centerTitle: true,
           title: Text(
-            "Profile",
+            "Settings",
             style: AppTextStyle.interBold.copyWith(
               color: AppColors.black,
               fontSize: 20.sp,
@@ -42,11 +44,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           actions: [
-            IconButton(
-              onPressed: () {
-                context.read<AuthViewModel>().logout(context);
+            ZoomTapAnimation(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  RouteNames.newsRoute,
+                );
               },
-              icon: const Icon(Icons.logout),
+              child: SvgPicture.asset(
+                AppImages.news,
+                width: 24.w,
+                height: 24.h,
+              ),
+            ),
+            SizedBox(
+              width: 10.w,
             ),
           ],
         ),
@@ -173,3 +185,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+
+// onPressed: () {
+// context.read<AuthViewModel>().logout(context);
+// },
