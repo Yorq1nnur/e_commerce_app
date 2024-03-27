@@ -61,27 +61,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: user?.photoURL == null ?ClipRRect(
-              borderRadius: BorderRadius.circular(
-                16.r,
-              ),
-              child: Image.network(
-                "https://www.tenforums.com/attachments/tutorials/146359d1501443008-change-default-account-picture-windows-10-a-user.png",
-                height: 24.h,
-                width: 24.w,
-                fit: BoxFit.cover,
-              ),
-            ):ClipRRect(
-              borderRadius: BorderRadius.circular(
-                16.r,
-              ),
-              child: Image.network(
-                user!.photoURL!,
-                height: 24.h,
-                width: 24.w,
-                fit: BoxFit.cover,
-              ),
-            ),
+            child: user?.photoURL == null
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                      16.r,
+                    ),
+                    child: Image.network(
+                      "https://www.tenforums.com/attachments/tutorials/146359d1501443008-change-default-account-picture-windows-10-a-user.png",
+                      height: 24.h,
+                      width: 24.w,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                      16.r,
+                    ),
+                    child: Image.network(
+                      user!.photoURL!,
+                      height: 24.h,
+                      width: 24.w,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
           ),
         ),
         body: Padding(
@@ -142,6 +144,49 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ],
                       )
                     ],
+                  ),
+                ),
+              ),
+              const Spacer(),
+              Center(
+                child: InkWell(
+                  onTap: () {
+                    context.read<AuthViewModel>().logout(context);
+                  },
+                  borderRadius: BorderRadius.circular(
+                    20.r,
+                  ),
+                  child: Container(
+                    height: 50.h,
+                    width: 300.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        20.r,
+                      ),
+                      color: Colors.redAccent,
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Logout",
+                            style: AppTextStyle.interBold.copyWith(
+                              color: Colors.black,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          Icon(
+                            Icons.logout,
+                            size: 20.w,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               )
