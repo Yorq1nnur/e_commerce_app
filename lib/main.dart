@@ -7,15 +7,23 @@ import 'package:e_commerce_app/view_models/notifications_view_model.dart';
 import 'package:e_commerce_app/view_models/books_view_model.dart';
 import 'package:e_commerce_app/view_models/tab_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  debugPrint(
+      "BACKGROUND MODE DA PUSH NOTIFICATION KELDI:${message.notification!.title}");
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging.instance.subscribeToTopic("news");
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(
     MultiProvider(
       providers: [

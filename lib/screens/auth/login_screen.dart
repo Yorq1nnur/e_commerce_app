@@ -31,8 +31,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String email = '';
-    String password = '';
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
@@ -65,7 +63,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     MyTextField(
                       onChanged: (v) {
-                        email = v;
                       },
                       textEditingController: emailController,
                       labelText: "EMAIL",
@@ -78,7 +75,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     MyTextField(
                       onChanged: (v) {
-                        password = v;
                       },
                       textEditingController: passwordController,
                       labelText: "PASSWORD",

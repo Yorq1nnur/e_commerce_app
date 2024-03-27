@@ -31,9 +31,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String email = '';
-    String password = '';
-    String userName = '';
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
@@ -71,7 +68,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     MyTextField(
                       onChanged: (v) {
-                        email = v;
                       },
                       textEditingController: emailController,
                       labelText: "EMAIL",
@@ -84,7 +80,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     MyTextField(
                       onChanged: (v) {
-                        userName = v;
                       },
                       textEditingController: usernameController,
                       labelText: "USER NAME",
@@ -97,7 +92,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     MyTextField(
                       onChanged: (v) {
-                        password = v;
                       },
                       textEditingController: passwordController,
                       labelText: "PASSWORD",
@@ -123,9 +117,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () async {
                           await context.read<AuthViewModel>().registerUser(
                                 context,
-                                email: email,
-                                password: password,
-                                username: userName,
+                                email: emailController.text,
+                                password: passwordController.text,
+                                username: usernameController.text,
                               );
                         },
                         child: Text(
