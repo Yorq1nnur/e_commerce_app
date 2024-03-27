@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/screens/tabs/profile/profile_screen.dart';
+import 'package:e_commerce_app/screens/tabs/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +17,7 @@ class _TabScreenState extends State<TabScreen> {
   List<Widget> screens = const [
     CategoriesScreen(),
     BooksScreen(),
-    ProfileScreen(),
+    SettingsScreen(),
   ];
 
   @override

@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/screens/add_book/add_book_screen.dart';
 import 'package:e_commerce_app/screens/add_category/add_category_screen.dart';
 import 'package:e_commerce_app/screens/news/news_screen.dart';
+import 'package:e_commerce_app/screens/profile/profile_screen.dart';
 import 'package:e_commerce_app/screens/splash/splash_screen.dart';
 import 'package:e_commerce_app/screens/tabs/tab_screen.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,10 @@ class AppRoutes {
         return navigate(
           const NewsScreen(),
         );
+      case RouteNames.profileRoute:
+        return navigate(
+          const ProfileScreen(),
+        );
 
       default:
         return navigate(
@@ -72,4 +77,5 @@ class RouteNames {
   static const String addCategoryRoute = "/add_category_route";
   static const String addBookRoute = "/add_book_route";
   static const String newsRoute = "/news_route";
+  static const String profileRoute = "/profile_route";
 }
