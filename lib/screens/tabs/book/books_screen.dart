@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app/screens/edit_book/edit_book_screen.dart';
 import 'package:e_commerce_app/screens/routes.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -235,7 +234,8 @@ class _BooksScreenState extends State<BooksScreen> {
                                                     backgroundColor:
                                                         AppColors.white,
                                                     title: const Text(
-                                                        "Ishonchingiz komilmi?"),
+                                                      "Ishonchingiz komilmi?",
+                                                    ),
                                                     titleTextStyle: AppTextStyle
                                                         .interBold
                                                         .copyWith(
@@ -253,8 +253,10 @@ class _BooksScreenState extends State<BooksScreen> {
                                                                     .docId,
                                                                 context,
                                                               );
-                                                          if (!context.mounted)
+                                                          if (!context
+                                                              .mounted) {
                                                             return;
+                                                          }
                                                           context
                                                               .read<
                                                                   NotificationsViewModel>()
@@ -445,8 +447,10 @@ class _BooksScreenState extends State<BooksScreen> {
                                                                     .docId,
                                                                 context,
                                                               );
-                                                          if (!context.mounted)
+                                                          if (!context
+                                                              .mounted) {
                                                             return;
+                                                          }
                                                           context
                                                               .read<
                                                                   NotificationsViewModel>()
@@ -483,8 +487,9 @@ class _BooksScreenState extends State<BooksScreen> {
                                                           style: AppTextStyle
                                                               .interBold
                                                               .copyWith(
-                                                                  color: AppColors
-                                                                      .black),
+                                                            color:
+                                                                AppColors.black,
+                                                          ),
                                                         ),
                                                       ),
                                                     ],

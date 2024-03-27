@@ -4,11 +4,14 @@ import 'package:e_commerce_app/screens/add_book/widgets/category_button.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
 import 'package:e_commerce_app/view_models/books_view_model.dart';
 import 'package:e_commerce_app/view_models/category_view_model.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
+import '../../data/api_provider/api_provider.dart';
+import '../../services/local_notification_service.dart';
 import '../../utils/colors/app_colors.dart';
 import '../../view_models/notifications_view_model.dart';
 
@@ -37,6 +40,46 @@ class _AddBookScreenState extends State<AddBookScreen> {
 
   String categoryDocId = '';
   int activeIndex = -1;
+  String fcmToken = "";
+
+  void init() async {
+    fcmToken = await FirebaseMessaging.instance.getToken() ?? "";
+    debugPrint("FCM TOKEN:$fcmToken");
+    final token = await FirebaseMessaging.instance.getAPNSToken();
+    debugPrint("getAPNSToken : ${token.toString()}");
+    LocalNotificationService.localNotificationService;
+    //Foreground
+    FirebaseMessaging.onMessage.listen(
+          (RemoteMessage remoteMessage) {
+        if (remoteMessage.notification != null) {
+          LocalNotificationService().showNotification(
+            title: remoteMessage.notification!.title!,
+            body: remoteMessage.notification!.body!,
+            id: DateTime.now().second.toInt(),
+          );
+
+          debugPrint(
+              "FOREGROUND NOTIFICATION:${remoteMessage.notification!.title}");
+        }
+      },
+    );
+    //Background
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage remoteMessage) {
+      debugPrint("ON MESSAGE OPENED APP:${remoteMessage.notification!.title}");
+    });
+    // Terminated
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) {
+        debugPrint("TERMINATED:${message.notification?.title}");
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -431,6 +474,21 @@ class _AddBookScreenState extends State<AddBookScreen> {
                       bookDescription: bookDescriptionController.text,
                       categoryId: categoryDocId,
                     );
+                    String messageId = await ApiProvider().sendNotificationToUsers(
+                      fcmToken: fcmToken,
+                      title: bookNameController.text,
+                      body: bookDescriptionController.text,
+                      imageUrl: imageUrlController.text,
+                      description: bookDescriptionController.text,
+                      bookAuthor: bookAuthorController.text,
+                      bookName: bookNameController.text,
+                      bookPrice: priceController.text,
+                      bookRate: rateController.text,
+                      categoryDocId: categoryDocId,
+                      topicName: "news",
+                    );
+                    debugPrint("MESSAGE ID:$messageId");
+                    if(!context.mounted) return;
                     await context
                         .read<BooksViewModel>()
                         .insertProducts(category, context);

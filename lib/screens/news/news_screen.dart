@@ -31,9 +31,14 @@ class _NewsScreenState extends State<NewsScreen> {
             body: remoteMessage.notification!.body!,
             id: DateTime.now().second.toInt(),
           );
-
+          notificationTitle.add(remoteMessage.notification!.title!);
+          notificationBody.add(remoteMessage.notification!.body!);
           debugPrint(
               "FOREGROUND NOTIFICATION:${remoteMessage.notification!.title}");
+debugPrint(
+              "CURRENT NOTIFICATION BODY LENGTH:${notificationBody.length}");
+debugPrint(
+              "CURRENT NOTIFICATION TITLE LENGTH:${notificationTitle.length}");
         }
       },
     );
@@ -55,6 +60,9 @@ class _NewsScreenState extends State<NewsScreen> {
     super.initState();
   }
 
+  List<dynamic> notificationTitle = [];
+  List<dynamic> notificationBody = [];
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -73,6 +81,16 @@ class _NewsScreenState extends State<NewsScreen> {
               fontWeight: FontWeight.w900,
             ),
           ),
+        ),
+        body: Column(
+          children: [
+            ...List.generate(
+              notificationBody.length,
+              (index) => Text(
+                notificationBody[index],
+              ),
+            ),
+          ],
         ),
       ),
     );

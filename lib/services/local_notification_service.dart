@@ -81,28 +81,38 @@ class LocalNotificationService {
     required String title,
     required String body,
     required int id,
+    String? topicName,
+    String? fcmToken,
+    String? imageUrl,
+    String? description,
+    String? bookName,
+    String? bookAuthor,
+    String? bookPrice,
+    String? bookRate,
+    String? categoryDocId,
   }) {
     flutterLocalNotificationsPlugin.show(
-        id,
-        title,
-        body,
-        NotificationDetails(
-            android: AndroidNotificationDetails(
-              androidNotificationChannel.id,
-              androidNotificationChannel.name,
-              priority: Priority.max,
-              playSound: true,
-              icon: "app_icon",
-              showProgress: true,
-              largeIcon: const DrawableResourceAndroidBitmap('app_icon'),
-            ),
-            iOS: DarwinNotificationDetails(
-              subtitle: title,
-              presentAlert: true,
-              presentSound: true,
-              interruptionLevel: InterruptionLevel.active,
-            )),
-        payload: "news_screen");
+      id,
+      title,
+      body,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          androidNotificationChannel.id,
+          androidNotificationChannel.name,
+          priority: Priority.max,
+          playSound: true,
+          icon: "app_icon",
+          showProgress: true,
+          largeIcon: const DrawableResourceAndroidBitmap('app_icon'),
+        ),
+        iOS: DarwinNotificationDetails(
+          subtitle: title,
+          presentAlert: true,
+          presentSound: true,
+          interruptionLevel: InterruptionLevel.active,
+        ),
+      ),
+    );
     debugPrint("CURRENT NOTIFICATION ID:$id");
   }
 
