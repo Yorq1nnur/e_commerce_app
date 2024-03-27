@@ -155,160 +155,159 @@ class _BooksScreenState extends State<BooksScreen> {
                             children: [
                               ...List.generate(
                                 list.length,
-                                (index) => InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => BookDetailsScreen(
-                                          bookModel: list[index],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                      bottom: 10.h,
+                                (index) => Container(
+                                  padding: EdgeInsets.only(
+                                    bottom: 10.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: AppColors.black,
+                                      width: 2.w,
                                     ),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: AppColors.black,
-                                        width: 2.w,
-                                      ),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        CachedNetworkImage(
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BookDetailsScreen(
+                                                bookModel: list[index],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: CachedNetworkImage(
                                           imageUrl: list[index].imageUrl,
                                           height: 200.h,
                                           width: double.infinity,
                                           fit: BoxFit.cover,
                                         ),
-                                        SizedBox(
-                                          height: 10.h,
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          list[index].bookName,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                        Expanded(
-                                          child: Text(
-                                            list[index].bookName,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            ZoomTapAnimation(
-                                              onTap: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        EditBookScreen(
-                                                      bookModel: list[index],
-                                                    ),
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ZoomTapAnimation(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EditBookScreen(
+                                                    bookModel: list[index],
                                                   ),
-                                                );
-                                              },
-                                              child: const Icon(
-                                                Icons.edit,
-                                                color: Colors.blue,
-                                              ),
+                                                ),
+                                              );
+                                            },
+                                            child: const Icon(
+                                              Icons.edit,
+                                              color: Colors.blue,
                                             ),
-                                            SizedBox(
-                                              width: 50.w,
-                                            ),
-                                            ZoomTapAnimation(
-                                              onTap: () async {
-                                                showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      backgroundColor:
-                                                          AppColors.white,
-                                                      title: const Text(
-                                                          "Ishonchingiz komilmi?"),
-                                                      titleTextStyle:
-                                                          AppTextStyle.interBold
+                                          ),
+                                          SizedBox(
+                                            width: 50.w,
+                                          ),
+                                          ZoomTapAnimation(
+                                            onTap: () async {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    backgroundColor:
+                                                        AppColors.white,
+                                                    title: const Text(
+                                                        "Ishonchingiz komilmi?"),
+                                                    titleTextStyle: AppTextStyle
+                                                        .interBold
+                                                        .copyWith(
+                                                      color: AppColors.black,
+                                                      fontSize: 20.sp,
+                                                    ),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () async {
+                                                          context
+                                                              .read<
+                                                                  BooksViewModel>()
+                                                              .deleteProduct(
+                                                                list[index]
+                                                                    .docId,
+                                                                context,
+                                                              );
+                                                          if (!context.mounted)
+                                                            return;
+                                                          context
+                                                              .read<
+                                                                  NotificationsViewModel>()
+                                                              .showNotifications(
+                                                                title:
+                                                                    "${list[index].bookName} NOMLI YANGI KITOB O'CHIRILDI!!!",
+                                                                body: list[
+                                                                        index]
+                                                                    .bookName,
+                                                                id: DateTime
+                                                                        .now()
+                                                                    .millisecond,
+                                                              );
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text(
+                                                          'Yes',
+                                                          style: AppTextStyle
+                                                              .interBold
                                                               .copyWith(
-                                                        color: AppColors.black,
-                                                        fontSize: 20.sp,
+                                                            color:
+                                                                AppColors.black,
+                                                          ),
+                                                        ),
                                                       ),
-                                                      actions: <Widget>[
-                                                        TextButton(
-                                                          onPressed: () async {
-                                                            context
-                                                                .read<
-                                                                    BooksViewModel>()
-                                                                .deleteProduct(
-                                                                  list[index]
-                                                                      .docId,
-                                                                  context,
-                                                                );
-                                                            if (!context
-                                                                .mounted)
-                                                              return;
-                                                            context
-                                                                .read<
-                                                                    NotificationsViewModel>()
-                                                                .showNotifications(
-                                                                  title:
-                                                                      "${list[index].bookName} NOMLI YANGI KITOB O'CHIRILDI!!!",
-                                                                  body: list[
-                                                                          index]
-                                                                      .bookName,
-                                                                  id: DateTime
-                                                                          .now()
-                                                                      .millisecond,
-                                                                );
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          child: Text(
-                                                            'Yes',
-                                                            style: AppTextStyle
-                                                                .interBold
-                                                                .copyWith(
-                                                              color: AppColors
-                                                                  .black,
-                                                            ),
-                                                          ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text(
+                                                          'No',
+                                                          style: AppTextStyle
+                                                              .interBold
+                                                              .copyWith(
+                                                                  color: AppColors
+                                                                      .black),
                                                         ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: Text(
-                                                            'No',
-                                                            style: AppTextStyle
-                                                                .interBold
-                                                                .copyWith(
-                                                                    color: AppColors
-                                                                        .black),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                              child: const Icon(
-                                                Icons.delete,
-                                                color: Colors.red,
-                                              ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: const Icon(
+                                              Icons.delete,
+                                              color: Colors.red,
                                             ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -348,160 +347,159 @@ class _BooksScreenState extends State<BooksScreen> {
                             children: [
                               ...List.generate(
                                 list.length,
-                                (index) => InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => BookDetailsScreen(
-                                          bookModel: list[index],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                      bottom: 10.h,
+                                (index) => Container(
+                                  padding: EdgeInsets.only(
+                                    bottom: 10.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: AppColors.black,
+                                      width: 2.w,
                                     ),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: AppColors.black,
-                                        width: 2.w,
-                                      ),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        CachedNetworkImage(
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BookDetailsScreen(
+                                                bookModel: list[index],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: CachedNetworkImage(
                                           imageUrl: list[index].imageUrl,
                                           height: 200.h,
                                           width: double.infinity,
                                           fit: BoxFit.cover,
                                         ),
-                                        SizedBox(
-                                          height: 10.h,
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          list[index].bookName,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                        Expanded(
-                                          child: Text(
-                                            list[index].bookName,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            ZoomTapAnimation(
-                                              onTap: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        EditBookScreen(
-                                                      bookModel: list[index],
-                                                    ),
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ZoomTapAnimation(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EditBookScreen(
+                                                    bookModel: list[index],
                                                   ),
-                                                );
-                                              },
-                                              child: const Icon(
-                                                Icons.edit,
-                                                color: Colors.blue,
-                                              ),
+                                                ),
+                                              );
+                                            },
+                                            child: const Icon(
+                                              Icons.edit,
+                                              color: Colors.blue,
                                             ),
-                                            SizedBox(
-                                              width: 50.w,
-                                            ),
-                                            ZoomTapAnimation(
-                                              onTap: () async {
-                                                showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      backgroundColor:
-                                                          AppColors.white,
-                                                      title: const Text(
-                                                          "Ishonchingiz komilmi?"),
-                                                      titleTextStyle:
-                                                          AppTextStyle.interBold
+                                          ),
+                                          SizedBox(
+                                            width: 50.w,
+                                          ),
+                                          ZoomTapAnimation(
+                                            onTap: () async {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    backgroundColor:
+                                                        AppColors.white,
+                                                    title: const Text(
+                                                        "Ishonchingiz komilmi?"),
+                                                    titleTextStyle: AppTextStyle
+                                                        .interBold
+                                                        .copyWith(
+                                                      color: AppColors.black,
+                                                      fontSize: 20.sp,
+                                                    ),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () async {
+                                                          context
+                                                              .read<
+                                                                  BooksViewModel>()
+                                                              .deleteProduct(
+                                                                list[index]
+                                                                    .docId,
+                                                                context,
+                                                              );
+                                                          if (!context.mounted)
+                                                            return;
+                                                          context
+                                                              .read<
+                                                                  NotificationsViewModel>()
+                                                              .showNotifications(
+                                                                title:
+                                                                    "${list[index].bookName} NOMLI YANGI KITOB O'CHIRILDI!!!",
+                                                                body: list[
+                                                                        index]
+                                                                    .bookName,
+                                                                id: DateTime
+                                                                        .now()
+                                                                    .millisecond,
+                                                              );
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text(
+                                                          'Yes',
+                                                          style: AppTextStyle
+                                                              .interBold
                                                               .copyWith(
-                                                        color: AppColors.black,
-                                                        fontSize: 20.sp,
+                                                            color:
+                                                                AppColors.black,
+                                                          ),
+                                                        ),
                                                       ),
-                                                      actions: <Widget>[
-                                                        TextButton(
-                                                          onPressed: () async {
-                                                            context
-                                                                .read<
-                                                                    BooksViewModel>()
-                                                                .deleteProduct(
-                                                                  list[index]
-                                                                      .docId,
-                                                                  context,
-                                                                );
-                                                            if (!context
-                                                                .mounted)
-                                                              return;
-                                                            context
-                                                                .read<
-                                                                    NotificationsViewModel>()
-                                                                .showNotifications(
-                                                                  title:
-                                                                      "${list[index].bookName} NOMLI YANGI KITOB O'CHIRILDI!!!",
-                                                                  body: list[
-                                                                          index]
-                                                                      .bookName,
-                                                                  id: DateTime
-                                                                          .now()
-                                                                      .millisecond,
-                                                                );
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          child: Text(
-                                                            'Yes',
-                                                            style: AppTextStyle
-                                                                .interBold
-                                                                .copyWith(
-                                                              color: AppColors
-                                                                  .black,
-                                                            ),
-                                                          ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text(
+                                                          'No',
+                                                          style: AppTextStyle
+                                                              .interBold
+                                                              .copyWith(
+                                                                  color: AppColors
+                                                                      .black),
                                                         ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: Text(
-                                                            'No',
-                                                            style: AppTextStyle
-                                                                .interBold
-                                                                .copyWith(
-                                                                    color: AppColors
-                                                                        .black),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                              child: const Icon(
-                                                Icons.delete,
-                                                color: Colors.red,
-                                              ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: const Icon(
+                                              Icons.delete,
+                                              color: Colors.red,
                                             ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
