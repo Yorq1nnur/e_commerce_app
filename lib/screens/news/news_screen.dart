@@ -3,7 +3,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../services/local_notification_service.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -33,11 +32,7 @@ class _NewsScreenState extends State<NewsScreen> {
           );
           debugPrint(
               "FOREGROUND NOTIFICATION:${remoteMessage.notification!.title}");
-          debugPrint(
-              "CURRENT NOTIFICATION BODY LENGTH:${notificationBody.length}");
-          debugPrint(
-              "CURRENT NOTIFICATION TITLE LENGTH:${notificationTitle.length}");
-        }
+         }
       },
     );
     //Background
@@ -58,8 +53,6 @@ class _NewsScreenState extends State<NewsScreen> {
     super.initState();
   }
 
-  List<dynamic> notificationTitle = [];
-  List<dynamic> notificationBody = [];
 
   @override
   Widget build(BuildContext context) {
@@ -82,22 +75,6 @@ class _NewsScreenState extends State<NewsScreen> {
         ),
         body: Column(
           children: [
-            ...List.generate(
-              notificationBody.length,
-              (index) => Text(
-                notificationBody[index],
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                debugPrint("Title length: ${notificationTitle.length}");
-                debugPrint("Title length: ${notificationBody.length}");
-              },
-              child: Text(
-                "TAP ME",
-                style: AppTextStyle.interBold,
-              ),
-            ),
           ],
         ),
       ),
