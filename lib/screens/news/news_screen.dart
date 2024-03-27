@@ -24,7 +24,7 @@ class _NewsScreenState extends State<NewsScreen> {
     LocalNotificationService.localNotificationService;
     //Foreground
     FirebaseMessaging.onMessage.listen(
-          (RemoteMessage remoteMessage) {
+      (RemoteMessage remoteMessage) {
         if (remoteMessage.notification != null) {
           LocalNotificationService().showNotification(
             title: remoteMessage.notification!.title!,
@@ -54,6 +54,7 @@ class _NewsScreenState extends State<NewsScreen> {
     init();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(

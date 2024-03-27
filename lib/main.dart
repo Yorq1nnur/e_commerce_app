@@ -27,11 +27,21 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => TabViewModel()),
-        ChangeNotifierProvider(create: (_) => AuthViewModel()),
-        ChangeNotifierProvider(create: (_) => CategoriesViewModel()),
-        ChangeNotifierProvider(create: (_) => BooksViewModel()),
-        ChangeNotifierProvider(create: (_) => NotificationsViewModel()),
+        ChangeNotifierProvider(
+          create: (_) => TabViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AuthViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CategoriesViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => BooksViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NotificationsViewModel(),
+        ),
       ],
       child: const MyApp(),
     ),
