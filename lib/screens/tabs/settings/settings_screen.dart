@@ -1,12 +1,15 @@
 import 'package:e_commerce_app/screens/routes.dart';
 import 'package:e_commerce_app/utils/images/app_images.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../../utils/colors/app_colors.dart';
 import '../../../utils/styles/app_text_style.dart';
+import '../../../view_models/auth_view_model.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -18,6 +21,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
+    User? user = context.watch<AuthViewModel>().getUser;
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -57,12 +61,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
+            child: user?.photoURL == null ?ClipRRect(
               borderRadius: BorderRadius.circular(
                 16.r,
               ),
               child: Image.network(
                 "https://www.tenforums.com/attachments/tutorials/146359d1501443008-change-default-account-picture-windows-10-a-user.png",
+                height: 24.h,
+                width: 24.w,
+                fit: BoxFit.cover,
+              ),
+            ):ClipRRect(
+              borderRadius: BorderRadius.circular(
+                16.r,
+              ),
+              child: Image.network(
+                user!.photoURL!,
                 height: 24.h,
                 width: 24.w,
                 fit: BoxFit.cover,
