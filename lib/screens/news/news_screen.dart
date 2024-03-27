@@ -32,7 +32,7 @@ class _NewsScreenState extends State<NewsScreen> {
           );
           debugPrint(
               "FOREGROUND NOTIFICATION:${remoteMessage.notification!.title}");
-         }
+        }
       },
     );
     //Background
@@ -53,7 +53,6 @@ class _NewsScreenState extends State<NewsScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -73,10 +72,15 @@ class _NewsScreenState extends State<NewsScreen> {
             ),
           ),
         ),
-        body: Column(
-          children: [
-          ],
-        ),
+        // body: Padding(
+        //   padding: EdgeInsets.symmetric(
+        //     horizontal: 20.w,
+        //     vertical: 20.h,
+        //   ),
+        //   child: Column(
+        //     children: [],
+        //   ),
+        // ),
       ),
     );
   }
