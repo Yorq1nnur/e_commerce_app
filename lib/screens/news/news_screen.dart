@@ -31,13 +31,11 @@ class _NewsScreenState extends State<NewsScreen> {
             body: remoteMessage.notification!.body!,
             id: DateTime.now().second.toInt(),
           );
-          notificationTitle.add(remoteMessage.notification!.title!);
-          notificationBody.add(remoteMessage.notification!.body!);
           debugPrint(
               "FOREGROUND NOTIFICATION:${remoteMessage.notification!.title}");
-debugPrint(
+          debugPrint(
               "CURRENT NOTIFICATION BODY LENGTH:${notificationBody.length}");
-debugPrint(
+          debugPrint(
               "CURRENT NOTIFICATION TITLE LENGTH:${notificationTitle.length}");
         }
       },
@@ -88,6 +86,16 @@ debugPrint(
               notificationBody.length,
               (index) => Text(
                 notificationBody[index],
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                debugPrint("Title length: ${notificationTitle.length}");
+                debugPrint("Title length: ${notificationBody.length}");
+              },
+              child: Text(
+                "TAP ME",
+                style: AppTextStyle.interBold,
               ),
             ),
           ],
