@@ -43,6 +43,7 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: ZoomTapAnimation(
             onTap: () {

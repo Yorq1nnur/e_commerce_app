@@ -38,6 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: context.watch<AuthViewModel>().loading
             ? const Center(
                 child: CircularProgressIndicator(),

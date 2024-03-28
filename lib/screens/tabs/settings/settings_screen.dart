@@ -29,6 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,

@@ -35,6 +35,7 @@ class _BooksScreenState extends State<BooksScreen> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,

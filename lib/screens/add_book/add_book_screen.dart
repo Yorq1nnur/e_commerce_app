@@ -97,6 +97,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: ZoomTapAnimation(
             onTap: () {
@@ -492,7 +493,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                       bookName: bookNameController.text,
                       docId: "",
                       bookDescription: bookDescriptionController.text,
-                      categoryId: categoryDocId, categoryName: '',
+                      categoryId: categoryDocId,
+                      categoryName: '',
                     );
                     String messageId =
                         await ApiProvider().sendNotificationToUsers(

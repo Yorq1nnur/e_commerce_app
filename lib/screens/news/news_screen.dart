@@ -62,6 +62,7 @@ class _NewsScreenState extends State<NewsScreen> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
             "NEWS",

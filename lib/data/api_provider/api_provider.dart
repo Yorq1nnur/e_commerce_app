@@ -42,7 +42,7 @@ class ApiProvider {
               "book_description": description ??
                   "Finland's national carrier Finnair has started weighing passengers on its flights from the capital city of Helsinki. The weigh-ins are being done on a voluntary basis and are completely anonymous. A company spokesperson said the new initiative is to ensure safety standards on flights are adhered to. He said any airplane should not exceed the prescribed maximum weight for safe take-offs and landings.",
               "author": bookAuthor ?? "",
-              "rate" : bookRate ?? "0.0",
+              "rate": bookRate ?? "0.0",
               "price": bookPrice ?? "0",
               "category_doc_id": categoryDocId ?? ""
             }
@@ -59,6 +59,7 @@ class ApiProvider {
 
     return "ERROR";
   }
+
   Future<Object> readNotification({
     String? topicName,
     String? fcmToken,

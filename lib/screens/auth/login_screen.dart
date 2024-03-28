@@ -38,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: context.watch<AuthViewModel>().loading
             ? const Center(
                 child: CircularProgressIndicator(),

@@ -157,11 +157,11 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
               ),
               imageUrl.isNotEmpty
                   ? CachedNetworkImage(
-                imageUrl: imageUrl,
-                height: 300.h,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              )
+                      imageUrl: imageUrl,
+                      height: 300.h,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    )
                   : const CircularProgressIndicator(),
               SizedBox(
                 height: 24.h,
@@ -176,16 +176,16 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                       docId: "",
                     );
                     await context.read<CategoriesViewModel>().insertCategory(
-                      category,
-                      context,
-                    );
+                          category,
+                          context,
+                        );
                     if (!context.mounted) return;
                     context.read<NotificationsViewModel>().showNotifications(
-                      title:
-                      "${categoryNameController.text} NOMLI YANGI KATEGORIYA QO'SHILDI!!!",
-                      body: categoryNameController.text,
-                      id: DateTime.now().millisecond,
-                    );
+                          title:
+                              "${categoryNameController.text} NOMLI YANGI KATEGORIYA QO'SHILDI!!!",
+                          body: categoryNameController.text,
+                          id: DateTime.now().millisecond,
+                        );
                     if (!context.mounted) return;
                     Navigator.pop(context);
                   } else {
@@ -242,9 +242,9 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       storagePath = "files/images/${image.name}";
       if (mounted) {
         imageUrl = (await context.read<ImageViewModel>().uploadImage(
-          pickedFile: image,
-          storagePath: storagePath,
-        ))!;
+              pickedFile: image,
+              storagePath: storagePath,
+            ))!;
       }
       debugPrint("DOWNLOAD URL:$imageUrl");
       imageNotEmpty = true;
@@ -263,9 +263,9 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       storagePath = "files/images/${image.name}";
       if (mounted) {
         imageUrl = (await context.read<ImageViewModel>().uploadImage(
-          pickedFile: image,
-          storagePath: storagePath,
-        ))!;
+              pickedFile: image,
+              storagePath: storagePath,
+            ))!;
       }
       debugPrint("DOWNLOAD URL:$imageUrl");
       imageNotEmpty = true;
@@ -277,9 +277,9 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
     showModalBottomSheet(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
-            )),
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        )),
         context: context,
         builder: (context) {
           return Column(

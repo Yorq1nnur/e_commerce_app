@@ -23,6 +23,7 @@ class _TabScreenState extends State<TabScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: screens[context.watch<TabViewModel>().getIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: context.watch<TabViewModel>().getIndex,

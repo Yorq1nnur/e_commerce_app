@@ -38,7 +38,6 @@ class _EditBookScreenState extends State<EditBookScreen> {
     String bookName = '';
     String bookDescription = '';
     String bookPrice = '';
-    String imageUrl = '';
     String rate = '';
     String bookAuthor = '';
     String categoryDocId = '';
@@ -51,6 +50,7 @@ class _EditBookScreenState extends State<EditBookScreen> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: ZoomTapAnimation(
             onTap: () {
@@ -187,51 +187,6 @@ class _EditBookScreenState extends State<EditBookScreen> {
                             decoration: InputDecoration(
                               label: const Text(
                                 "BOOK DESCRIPTION",
-                              ),
-                              labelStyle: AppTextStyle.interBold.copyWith(
-                                fontSize: 10.sp,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                  16.r,
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.black54,
-                                  width: 2.w,
-                                ),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                  16.r,
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
-                                  width: 2.w,
-                                ),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                  16.r,
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
-                                  width: 2.w,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 24.h,
-                          ),
-                          TextFormField(
-                            keyboardType: TextInputType.url,
-                            textInputAction: TextInputAction.next,
-                            onChanged: (v) {
-                              imageUrl = v;
-                            },
-                            decoration: InputDecoration(
-                              label: const Text(
-                                "IMAGE URL",
                               ),
                               labelStyle: AppTextStyle.interBold.copyWith(
                                 fontSize: 10.sp,

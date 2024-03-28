@@ -19,6 +19,7 @@ class PermissionsScreen extends StatelessWidget {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.white,
