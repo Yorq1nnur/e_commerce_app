@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/screens/add_book/add_book_screen.dart';
 import 'package:e_commerce_app/screens/add_category/add_category_screen.dart';
 import 'package:e_commerce_app/screens/news/news_screen.dart';
+import 'package:e_commerce_app/screens/permissions/permissions_screen.dart';
 import 'package:e_commerce_app/screens/profile/profile_screen.dart';
 import 'package:e_commerce_app/screens/splash/splash_screen.dart';
 import 'package:e_commerce_app/screens/tabs/tab_screen.dart';
@@ -48,6 +49,10 @@ class AppRoutes {
         return navigate(
           const ProfileScreen(),
         );
+      case RouteNames.permissionsRoute:
+        return navigate(
+          const PermissionsScreen(),
+        );
 
       default:
         return navigate(
@@ -78,4 +83,5 @@ class RouteNames {
   static const String addBookRoute = "/add_book_route";
   static const String newsRoute = "/news_route";
   static const String profileRoute = "/profile_route";
+  static const String permissionsRoute = "/permissions_route";
 }

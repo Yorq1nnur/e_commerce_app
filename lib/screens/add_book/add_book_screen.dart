@@ -8,11 +8,13 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../data/api_provider/api_provider.dart';
 import '../../services/local_notification_service.dart';
 import '../../utils/colors/app_colors.dart';
+import '../../view_models/image_view_model.dart';
 import '../../view_models/notifications_view_model.dart';
 
 class AddBookScreen extends StatefulWidget {
@@ -26,7 +28,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
   final TextEditingController bookNameController = TextEditingController();
   final TextEditingController bookDescriptionController =
       TextEditingController();
-  final TextEditingController imageUrlController = TextEditingController();
+  // final TextEditingController imageUrlController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController rateController = TextEditingController();
   final TextEditingController bookAuthorController = TextEditingController();
@@ -34,13 +36,16 @@ class _AddBookScreenState extends State<AddBookScreen> {
   @override
   void dispose() {
     bookNameController.dispose();
-    imageUrlController.dispose();
+    // imageUrlController.dispose();
     super.dispose();
   }
 
   String categoryDocId = '';
   int activeIndex = -1;
   String fcmToken = "";
+  final ImagePicker picker = ImagePicker();
+  String imageUrl = "";
+  String storagePath = "";
 
   void init() async {
     fcmToken = await FirebaseMessaging.instance.getToken() ?? "";
@@ -50,7 +55,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
     LocalNotificationService.localNotificationService;
     //Foreground
     FirebaseMessaging.onMessage.listen(
-          (RemoteMessage remoteMessage) {
+      (RemoteMessage remoteMessage) {
         if (remoteMessage.notification != null) {
           LocalNotificationService().showNotification(
             title: remoteMessage.notification!.title!,
@@ -263,46 +268,46 @@ class _AddBookScreenState extends State<AddBookScreen> {
                             SizedBox(
                               height: 24.h,
                             ),
-                            TextFormField(
-                              keyboardType: TextInputType.url,
-                              textInputAction: TextInputAction.next,
-                              controller: imageUrlController,
-                              decoration: InputDecoration(
-                                label: const Text(
-                                  "IMAGE URL",
-                                ),
-                                labelStyle: AppTextStyle.interBold.copyWith(
-                                  fontSize: 10.sp,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                    16.r,
-                                  ),
-                                  borderSide: BorderSide(
-                                    color: Colors.black54,
-                                    width: 2.w,
-                                  ),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                    16.r,
-                                  ),
-                                  borderSide: BorderSide(
-                                    color: Colors.red,
-                                    width: 2.w,
-                                  ),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                    16.r,
-                                  ),
-                                  borderSide: BorderSide(
-                                    color: Colors.red,
-                                    width: 2.w,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // TextFormField(
+                            //   keyboardType: TextInputType.url,
+                            //   textInputAction: TextInputAction.next,
+                            //   // controller: imageUrlController,
+                            //   decoration: InputDecoration(
+                            //     label: const Text(
+                            //       "IMAGE URL",
+                            //     ),
+                            //     labelStyle: AppTextStyle.interBold.copyWith(
+                            //       fontSize: 10.sp,
+                            //     ),
+                            //     border: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(
+                            //         16.r,
+                            //       ),
+                            //       borderSide: BorderSide(
+                            //         color: Colors.black54,
+                            //         width: 2.w,
+                            //       ),
+                            //     ),
+                            //     errorBorder: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(
+                            //         16.r,
+                            //       ),
+                            //       borderSide: BorderSide(
+                            //         color: Colors.red,
+                            //         width: 2.w,
+                            //       ),
+                            //     ),
+                            //     focusedErrorBorder: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(
+                            //         16.r,
+                            //       ),
+                            //       borderSide: BorderSide(
+                            //         color: Colors.red,
+                            //         width: 2.w,
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                             SizedBox(
                               height: 24.h,
                             ),
@@ -393,6 +398,27 @@ class _AddBookScreenState extends State<AddBookScreen> {
                         ),
                       ),
                       Center(
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.all(24),
+                            backgroundColor: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                          onPressed: () {
+                            takeAnImage();
+                          },
+                          child: Text(
+                            "TAKE AN IMAGE",
+                            style: AppTextStyle.interSemiBold.copyWith(
+                              fontSize: 24,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Center(
                         child: Text(
                           "PLEASE, SELECT CATEGORY:",
                           textAlign: TextAlign.center,
@@ -458,7 +484,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
               ZoomTapAnimation(
                 onTap: () async {
                   if (priceController.text != "" &&
-                      imageUrlController.text != "" &&
+                      imageUrl != "" &&
                       bookDescriptionController.text != '' &&
                       bookNameController.text != '' &&
                       categoryDocId != '' &&
@@ -466,7 +492,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                       bookAuthorController.text != '') {
                     BookModel category = BookModel(
                       price: double.parse(priceController.text),
-                      imageUrl: imageUrlController.text,
+                      imageUrl: imageUrl,
                       rate: rateController.text,
                       bookAuthor: bookAuthorController.text,
                       bookName: bookNameController.text,
@@ -474,11 +500,12 @@ class _AddBookScreenState extends State<AddBookScreen> {
                       bookDescription: bookDescriptionController.text,
                       categoryId: categoryDocId,
                     );
-                    String messageId = await ApiProvider().sendNotificationToUsers(
+                    String messageId =
+                        await ApiProvider().sendNotificationToUsers(
                       fcmToken: fcmToken,
                       title: bookNameController.text,
                       body: bookDescriptionController.text,
-                      imageUrl: imageUrlController.text,
+                      imageUrl: imageUrl,
                       description: bookDescriptionController.text,
                       bookAuthor: bookAuthorController.text,
                       bookName: bookNameController.text,
@@ -488,7 +515,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                       topicName: "news",
                     );
                     debugPrint("MESSAGE ID:$messageId");
-                    if(!context.mounted) return;
+                    if (!context.mounted) return;
                     await context
                         .read<BooksViewModel>()
                         .insertProducts(category, context);
@@ -542,5 +569,85 @@ class _AddBookScreenState extends State<AddBookScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _getImageFromCamera() async {
+    XFile? image = await picker.pickImage(
+      source: ImageSource.camera,
+      maxHeight: 1024,
+      maxWidth: 1024,
+    );
+    if (image != null && context.mounted) {
+      debugPrint("IMAGE PATH:${image.path}");
+      storagePath = "files/images/${image.name}";
+      if (mounted) {
+        imageUrl = await context.read<ImageViewModel>().uploadImage(
+              pickedFile: image,
+              storagePath: storagePath,
+            );
+      }
+
+      debugPrint("DOWNLOAD URL:$imageUrl");
+    }
+  }
+
+  Future<void> _getImageFromGallery() async {
+    XFile? image = await picker.pickImage(
+      source: ImageSource.gallery,
+      maxHeight: 1024,
+      maxWidth: 1024,
+    );
+    if (image != null && context.mounted) {
+      debugPrint("IMAGE PATH:${image.path}");
+      storagePath = "files/images/${image.name}";
+      if (mounted) {
+        imageUrl = await context.read<ImageViewModel>().uploadImage(
+              pickedFile: image,
+              storagePath: storagePath,
+            );
+      }
+
+      debugPrint("DOWNLOAD URL:$imageUrl");
+    }
+  }
+
+  takeAnImage() {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        )),
+        context: context,
+        builder: (context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 12.h),
+              ListTile(
+                onTap: () async {
+                  await _getImageFromGallery();
+
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
+                },
+                leading: const Icon(Icons.photo_album_outlined),
+                title: const Text("Gallereyadan olish"),
+              ),
+              ListTile(
+                onTap: () async {
+                  await _getImageFromCamera();
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
+                },
+                leading: const Icon(Icons.camera_alt),
+                title: const Text("Kameradan olish"),
+              ),
+              SizedBox(height: 24.h),
+            ],
+          );
+        });
   }
 }

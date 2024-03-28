@@ -3,6 +3,7 @@ import 'package:e_commerce_app/services/firebase_options.dart';
 import 'package:e_commerce_app/services/local_notification_service.dart';
 import 'package:e_commerce_app/view_models/auth_view_model.dart';
 import 'package:e_commerce_app/view_models/category_view_model.dart';
+import 'package:e_commerce_app/view_models/image_view_model.dart';
 import 'package:e_commerce_app/view_models/notifications_view_model.dart';
 import 'package:e_commerce_app/view_models/books_view_model.dart';
 import 'package:e_commerce_app/view_models/tab_view_model.dart';
@@ -24,6 +25,8 @@ Future<void> main() async {
   );
   FirebaseMessaging.instance.subscribeToTopic("news");
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  // AppPermissions.getSomePermissions();
   runApp(
     MultiProvider(
       providers: [
@@ -41,6 +44,9 @@ Future<void> main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => NotificationsViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ImageViewModel(),
         ),
       ],
       child: const MyApp(),
