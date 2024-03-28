@@ -72,7 +72,7 @@ class _BooksScreenState extends State<BooksScreen> {
             ),
             SingleChildScrollView(
               padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
+                horizontal: 10.w,
               ),
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
@@ -90,30 +90,40 @@ class _BooksScreenState extends State<BooksScreen> {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        CategoryButton(
-                          title: "All",
-                          onTap: () {
-                            setState(() {
-                              activeIndex = -1;
-                            });
-                            categoryDocId = '';
-                          },
-                          isActive: activeIndex == -1,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 5.w,
+                          ),
+                          child: CategoryButton(
+                            title: "All",
+                            onTap: () {
+                              setState(() {
+                                activeIndex = -1;
+                              });
+                              categoryDocId = '';
+                            },
+                            isActive: activeIndex == -1,
+                          ),
                         ),
                         ...List.generate(
                           list.length,
-                          (index) => CategoryButton(
-                            title: list[index].categoryName,
-                            onTap: () {
-                              debugPrint(
-                                  "\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
-                              categoryDocId = list[index].docId;
-                              debugPrint(categoryDocId);
-                              setState(() {
-                                activeIndex = index;
-                              });
-                            },
-                            isActive: activeIndex == index,
+                          (index) => Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 5.w,
+                            ),
+                            child: CategoryButton(
+                              title: list[index].categoryName,
+                              onTap: () {
+                                debugPrint(
+                                    "\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
+                                categoryDocId = list[index].docId;
+                                debugPrint(categoryDocId);
+                                setState(() {
+                                  activeIndex = index;
+                                });
+                              },
+                              isActive: activeIndex == index,
+                            ),
                           ),
                         )
                       ],
@@ -318,7 +328,7 @@ class _BooksScreenState extends State<BooksScreen> {
                         );
                       }
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: SizedBox(),
                       );
                     },
                   )
