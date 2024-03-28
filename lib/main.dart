@@ -15,7 +15,8 @@ import 'package:provider/provider.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   debugPrint(
-      "BACKGROUND MODE DA PUSH NOTIFICATION KELDI:${message.notification!.title}");
+    "BACKGROUND MODE DA PUSH NOTIFICATION KELDI:${message.notification!.title}",
+  );
 }
 
 Future<void> main() async {

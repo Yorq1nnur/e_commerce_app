@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app/data/models/book_model.dart';
 import 'package:e_commerce_app/data/models/category_model.dart';
 import 'package:e_commerce_app/screens/add_book/widgets/category_button.dart';
+import 'package:e_commerce_app/screens/add_book/widgets/save_button.dart';
 import 'package:e_commerce_app/utils/styles/app_text_style.dart';
 import 'package:e_commerce_app/view_models/books_view_model.dart';
 import 'package:e_commerce_app/view_models/category_view_model.dart';
@@ -28,8 +30,6 @@ class _AddBookScreenState extends State<AddBookScreen> {
   final TextEditingController bookNameController = TextEditingController();
   final TextEditingController bookDescriptionController =
       TextEditingController();
-
-  // final TextEditingController imageUrlController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController rateController = TextEditingController();
   final TextEditingController bookAuthorController = TextEditingController();
@@ -47,6 +47,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
   final ImagePicker picker = ImagePicker();
   String imageUrl = "";
   String storagePath = "";
+  bool imageNotEmpty = false;
 
   void init() async {
     fcmToken = await FirebaseMessaging.instance.getToken() ?? "";
@@ -269,49 +270,6 @@ class _AddBookScreenState extends State<AddBookScreen> {
                             SizedBox(
                               height: 24.h,
                             ),
-                            // TextFormField(
-                            //   keyboardType: TextInputType.url,
-                            //   textInputAction: TextInputAction.next,
-                            //   // controller: imageUrlController,
-                            //   decoration: InputDecoration(
-                            //     label: const Text(
-                            //       "IMAGE URL",
-                            //     ),
-                            //     labelStyle: AppTextStyle.interBold.copyWith(
-                            //       fontSize: 10.sp,
-                            //     ),
-                            //     border: OutlineInputBorder(
-                            //       borderRadius: BorderRadius.circular(
-                            //         16.r,
-                            //       ),
-                            //       borderSide: BorderSide(
-                            //         color: Colors.black54,
-                            //         width: 2.w,
-                            //       ),
-                            //     ),
-                            //     errorBorder: OutlineInputBorder(
-                            //       borderRadius: BorderRadius.circular(
-                            //         16.r,
-                            //       ),
-                            //       borderSide: BorderSide(
-                            //         color: Colors.red,
-                            //         width: 2.w,
-                            //       ),
-                            //     ),
-                            //     focusedErrorBorder: OutlineInputBorder(
-                            //       borderRadius: BorderRadius.circular(
-                            //         16.r,
-                            //       ),
-                            //       borderSide: BorderSide(
-                            //         color: Colors.red,
-                            //         width: 2.w,
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                            SizedBox(
-                              height: 24.h,
-                            ),
                             TextFormField(
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.next,
@@ -433,6 +391,25 @@ class _AddBookScreenState extends State<AddBookScreen> {
                         ),
                       ),
                       SizedBox(
+                        height: 24.h,
+                      ),
+                      imageNotEmpty
+                          ? Center(
+                              child: CachedNetworkImage(
+                                imageUrl: imageUrl,
+                                height: 200.h,
+                                width: 200.w,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : Center(
+                              child: Icon(
+                                Icons.hourglass_empty,
+                                color: Colors.redAccent,
+                                size: 200.h,
+                              ),
+                            ),
+                      SizedBox(
                         height: 10.h,
                       ),
                       Center(
@@ -498,7 +475,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                 ),
               ),
               const Spacer(),
-              ZoomTapAnimation(
+              SaveButton(
                 onTap: () async {
                   if (priceController.text != "" &&
                       imageUrl != "" &&
@@ -556,31 +533,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                     );
                   }
                 },
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.h,
-                  ),
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 30.w,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "SAVE",
-                      style: AppTextStyle.interBold.copyWith(
-                        color: AppColors.black,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              )
             ],
           ),
         ),
@@ -603,8 +556,9 @@ class _AddBookScreenState extends State<AddBookScreen> {
               storagePath: storagePath,
             ))!;
       }
-
       debugPrint("DOWNLOAD URL:$imageUrl");
+      imageNotEmpty = true;
+      setState(() {});
     }
   }
 
@@ -624,6 +578,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
             ))!;
       }
       debugPrint("DOWNLOAD URL:$imageUrl");
+      imageNotEmpty = true;
+      setState(() {});
     }
   }
 
@@ -643,10 +599,11 @@ class _AddBookScreenState extends State<AddBookScreen> {
               ListTile(
                 onTap: () async {
                   await _getImageFromGallery();
-
                   if (context.mounted) {
                     Navigator.pop(context);
                   }
+                  imageNotEmpty = true;
+                  setState(() {});
                 },
                 leading: const Icon(Icons.photo_album_outlined),
                 title: const Text("Gallereyadan olish"),
@@ -657,6 +614,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                   if (context.mounted) {
                     Navigator.pop(context);
                   }
+                  imageNotEmpty = true;
+                  setState(() {});
                 },
                 leading: const Icon(Icons.camera_alt),
                 title: const Text("Kameradan olish"),

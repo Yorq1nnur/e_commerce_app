@@ -403,7 +403,7 @@ class _EditBookScreenState extends State<EditBookScreen> {
                                         activeIndex = index;
                                       });
                                     },
-                                    isActive: activeIndex == index,
+                                    isActive: activeIndex == index || widget.bookModel.categoryId == list[index].docId,
                                   ),
                                 )
                               ],
