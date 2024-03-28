@@ -7,6 +7,7 @@ class BookModel {
   final double price;
   final String imageUrl;
   final String categoryId;
+  final String categoryName;
 
   BookModel({
     required this.price,
@@ -15,6 +16,7 @@ class BookModel {
     required this.docId,
     required this.bookDescription,
     required this.categoryId,
+    required this.categoryName,
     required this.rate,
     required this.bookAuthor,
   });
@@ -24,6 +26,7 @@ class BookModel {
       docId: json["doc_id"] as String? ?? "",
       imageUrl: json["image_url"] as String? ?? "",
       categoryId: json["category_id"] as String? ?? "",
+      categoryName: json["category_name"] as String? ?? "",
       bookName: json["product_name"] as String? ?? "",
       bookDescription: json["product_description"] as String? ?? "",
       price: json["price"] as double? ?? 0.0,
@@ -40,6 +43,7 @@ class BookModel {
       "product_description": bookDescription,
       "price": price,
       "category_id": categoryId,
+      "category_name": categoryName,
       "rate": rate,
       "book_author": bookAuthor
     };
@@ -49,6 +53,7 @@ class BookModel {
     return {
       "image_url": imageUrl,
       "product_name": bookName,
+      "category_name": categoryName,
       "product_description": bookDescription,
       "price": price,
       "category_id": categoryId,

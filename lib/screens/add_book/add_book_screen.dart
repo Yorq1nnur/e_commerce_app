@@ -492,7 +492,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                       bookName: bookNameController.text,
                       docId: "",
                       bookDescription: bookDescriptionController.text,
-                      categoryId: categoryDocId,
+                      categoryId: categoryDocId, categoryName: '',
                     );
                     String messageId =
                         await ApiProvider().sendNotificationToUsers(
