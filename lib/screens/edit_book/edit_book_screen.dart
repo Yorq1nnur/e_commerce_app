@@ -69,7 +69,7 @@ class _EditBookScreenState extends State<EditBookScreen> {
         body: Column(
           children: [
             Expanded(
-              flex: 10,
+              // flex: 6,
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 physics: const BouncingScrollPhysics(),
@@ -354,72 +354,72 @@ class _EditBookScreenState extends State<EditBookScreen> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    Center(
-                      child: Text(
-                        "PLEASE, SELECT CATEGORY:",
-                        textAlign: TextAlign.center,
-                        style: AppTextStyle.interBold.copyWith(
-                          color: AppColors.black,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    SingleChildScrollView(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20.w,
-                      ),
-                      scrollDirection: Axis.horizontal,
-                      physics: const BouncingScrollPhysics(),
-                      child: StreamBuilder<List<CategoryModel>>(
-                        stream: context
-                            .read<CategoriesViewModel>()
-                            .listenCategories(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return Center(
-                              child: Text(snapshot.error.toString()),
-                            );
-                          }
-                          if (snapshot.hasData) {
-                            List<CategoryModel> list =
-                                snapshot.data as List<CategoryModel>;
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                ...List.generate(
-                                  list.length,
-                                  (index) => CategoryButton(
-                                    title: list[index].categoryName,
-                                    onTap: () {
-                                      debugPrint(
-                                          "\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
-                                      categoryDocId = list[index].docId;
-                                      debugPrint(categoryDocId);
-                                      setState(() {
-                                        activeIndex = index;
-                                      });
-                                    },
-                                    isActive: activeIndex == index || widget.bookModel.categoryId == list[index].docId,
-                                  ),
-                                )
-                              ],
-                            );
-                          }
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
-                      ),
-                    ),
                   ],
                 ),
               ),
             ),
-            const Spacer(),
+            Center(
+              child: Text(
+                "PLEASE, SELECT CATEGORY:",
+                textAlign: TextAlign.center,
+                style: AppTextStyle.interBold.copyWith(
+                  color: AppColors.black,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            StreamBuilder<List<CategoryModel>>(
+              stream: context.read<CategoriesViewModel>().listenCategories(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text(snapshot.error.toString()),
+                  );
+                }
+                if (snapshot.hasData) {
+                  List<CategoryModel> list =
+                      snapshot.data as List<CategoryModel>;
+                  return Expanded(
+                    child: GridView.count(
+                      childAspectRatio: 1,
+                      scrollDirection: Axis.vertical,
+                      physics: const BouncingScrollPhysics(),
+                      crossAxisCount: 2,
+                      children: [
+                        ...List.generate(
+                          list.length,
+                          (index) => CategoryButton(
+                            title: list[index].categoryName,
+                            onTap: () {
+                              debugPrint(
+                                  "\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
+                              categoryDocId = list[index].docId;
+                              debugPrint(categoryDocId);
+                              setState(() {
+                                activeIndex = index;
+                              });
+                            },
+                            isActive: activeIndex == index ||
+                                widget.bookModel.categoryId ==
+                                    list[index].docId,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
+            SizedBox(
+              height: 24.h,
+            ),
             ZoomTapAnimation(
               onTap: () async {
                 BookModel category = BookModel(
