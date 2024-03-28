@@ -28,6 +28,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
   final TextEditingController bookNameController = TextEditingController();
   final TextEditingController bookDescriptionController =
       TextEditingController();
+
   // final TextEditingController imageUrlController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController rateController = TextEditingController();
@@ -398,25 +399,41 @@ class _AddBookScreenState extends State<AddBookScreen> {
                         ),
                       ),
                       Center(
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.all(24),
-                            backgroundColor: Colors.green,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 50.w),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.all(24),
+                              backgroundColor: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                             ),
-                          ),
-                          onPressed: () {
-                            takeAnImage();
-                          },
-                          child: Text(
-                            "TAKE AN IMAGE",
-                            style: AppTextStyle.interSemiBold.copyWith(
-                              fontSize: 24,
-                              color: Colors.white,
+                            onPressed: () {
+                              takeAnImage();
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "TAKE AN IMAGE",
+                                  style: AppTextStyle.interSemiBold.copyWith(
+                                    fontSize: 24,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.image,
+                                  color: Colors.white,
+                                  size: 20.h,
+                                ),
+                              ],
                             ),
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
                       ),
                       Center(
                         child: Text(
@@ -581,10 +598,10 @@ class _AddBookScreenState extends State<AddBookScreen> {
       debugPrint("IMAGE PATH:${image.path}");
       storagePath = "files/images/${image.name}";
       if (mounted) {
-        imageUrl = await context.read<ImageViewModel>().uploadImage(
+        imageUrl = (await context.read<ImageViewModel>().uploadImage(
               pickedFile: image,
               storagePath: storagePath,
-            );
+            ))!;
       }
 
       debugPrint("DOWNLOAD URL:$imageUrl");
@@ -601,12 +618,11 @@ class _AddBookScreenState extends State<AddBookScreen> {
       debugPrint("IMAGE PATH:${image.path}");
       storagePath = "files/images/${image.name}";
       if (mounted) {
-        imageUrl = await context.read<ImageViewModel>().uploadImage(
+        imageUrl = (await context.read<ImageViewModel>().uploadImage(
               pickedFile: image,
               storagePath: storagePath,
-            );
+            ))!;
       }
-
       debugPrint("DOWNLOAD URL:$imageUrl");
     }
   }

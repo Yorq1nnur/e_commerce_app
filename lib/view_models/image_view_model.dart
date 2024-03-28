@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 class ImageViewModel extends ChangeNotifier {
   bool _isLoading = false;
+  String imageUploadError = '';
 
   bool get getLoader => _isLoading;
 
@@ -33,7 +34,7 @@ class ImageViewModel extends ChangeNotifier {
     return imageUrl;
   }
 
-  Future<String> uploadImage({required XFile pickedFile, required String storagePath}) async {
+  Future<String?> uploadImage({required XFile pickedFile, required String storagePath}) async {
     try {
       //1
 
@@ -50,9 +51,10 @@ class ImageViewModel extends ChangeNotifier {
 
       _notify(false);
       return downloadUrl;
-    } on FirebaseException {
-      throw Exception();
+    } on FirebaseException catch (error) {
+      debugPrint(error.toString());
     }
+    return null;
   }
 
   _notify(bool v) {
