@@ -385,6 +385,8 @@ class _EditBookScreenState extends State<EditBookScreen> {
                       snapshot.data as List<CategoryModel>;
                   return Expanded(
                     child: GridView.count(
+                      mainAxisSpacing: 5.h,
+                      crossAxisSpacing: 5.w,
                       childAspectRatio: 1,
                       scrollDirection: Axis.vertical,
                       physics: const BouncingScrollPhysics(),

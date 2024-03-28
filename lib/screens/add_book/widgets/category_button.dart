@@ -17,28 +17,23 @@ class CategoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 8.w,
-      ),
-      child: TextButton(
-        onPressed: onTap,
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-          ),
-          backgroundColor: isActive ? AppColors.c06070D : Colors.grey,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              15.r,
-            ),
+    return TextButton(
+      onPressed: onTap,
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.symmetric(
+          horizontal: 20.w,
+        ),
+        backgroundColor: isActive ? AppColors.c06070D : Colors.grey,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            15.r,
           ),
         ),
-        child: Text(
-          title,
-          style: AppTextStyle.interSemiBold.copyWith(
-            color: isActive ? AppColors.white : Colors.black,
-          ),
+      ),
+      child: Text(
+        title,
+        style: AppTextStyle.interSemiBold.copyWith(
+          color: isActive ? AppColors.white : Colors.black,
         ),
       ),
     );
