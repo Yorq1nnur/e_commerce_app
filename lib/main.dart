@@ -27,7 +27,6 @@ Future<void> main() async {
   FirebaseMessaging.instance.subscribeToTopic("news");
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  // AppPermissions.getSomePermissions();
   runApp(
     MultiProvider(
       providers: [
