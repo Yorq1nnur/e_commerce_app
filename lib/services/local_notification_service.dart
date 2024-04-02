@@ -33,6 +33,8 @@ class LocalNotificationService {
       android: androidInitializationSettings,
     );
 
+    var st = initializationSettings;
+    debugPrint(st.toString());
     // flutterLocalNotificationsPlugin.initialize(initializationSettings,
     //     onDidReceiveNotificationResponse: (notification) {
     //   if (notification.payload != null) {
@@ -52,6 +54,8 @@ class LocalNotificationService {
           badge: true,
           sound: true,
         );
+
+    debugPrint(result.toString());
   }
 
   @pragma('vm:entry-point')

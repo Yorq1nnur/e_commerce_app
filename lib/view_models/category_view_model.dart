@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import '../data/models/category_model.dart';
 import '../utils/constants/app_constants.dart';
@@ -87,9 +88,11 @@ class CategoriesViewModel extends ChangeNotifier {
           .collection(AppConstants.categories)
           .doc(docId)
           .delete();
-      deleteProductsByCategory(
+      await deleteProductsByCategory(
         categoryDocId: docId,
       );
+
+      await deleteImagesByCategory(categoryDocId: docId);
 
       _notify(false);
     } on FirebaseException catch (error) {
@@ -116,12 +119,46 @@ class CategoriesViewModel extends ChangeNotifier {
       }
 
       await Future.wait(deleteFutures);
-      print("All products in category $categoryDocId deleted successfully");
+      debugPrint("All products in category $categoryDocId deleted successfully");
     } catch (error) {
-      print("Error deleting products: $error");
+      debugPrint("Error deleting products: $error");
       // Handle error according to your app's requirements
     }
   }
+
+  Future<void> deleteImagesByCategory({required String categoryDocId}) async {
+    try {
+      final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+      await FirebaseFirestore.instance
+          .collection(AppConstants.books)
+          .where("category_id", isEqualTo: categoryDocId)
+          .get();
+
+      final List<Future<void>> deleteImageFutures = [];
+
+      for (final doc in querySnapshot.docs) {
+        final data = doc.data();
+        final String? imageUrl = data['image_url'];
+
+        if (imageUrl != null) {
+          // Extracting the image name from the URL
+          final imageName = imageUrl;
+          final Reference storageReference =
+          FirebaseStorage.instance.ref().child('files/images/$imageName');
+
+          // Deleting the image from Firestore
+          deleteImageFutures.add(storageReference.delete());
+        }
+      }
+
+      await Future.wait(deleteImageFutures);
+      debugPrint("All images in category $categoryDocId deleted successfully");
+    } catch (error) {
+      debugPrint("Error deleting images: $error");
+      // Handle error according to your app's requirements
+    }
+  }
+
 
   _notify(bool v) {
     _isLoading = v;
