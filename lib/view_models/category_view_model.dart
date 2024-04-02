@@ -87,6 +87,9 @@ class CategoriesViewModel extends ChangeNotifier {
           .collection(AppConstants.categories)
           .doc(docId)
           .delete();
+      deleteProductsByCategory(
+        categoryDocId: docId,
+      );
 
       _notify(false);
     } on FirebaseException catch (error) {
@@ -95,6 +98,28 @@ class CategoriesViewModel extends ChangeNotifier {
         context: context,
         message: error.code,
       );
+    }
+  }
+
+  Future<void> deleteProductsByCategory({required String categoryDocId}) async {
+    try {
+      final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await FirebaseFirestore.instance
+              .collection(AppConstants.books)
+              .where("category_id", isEqualTo: categoryDocId)
+              .get();
+
+      final List<Future<void>> deleteFutures = [];
+
+      for (final doc in querySnapshot.docs) {
+        deleteFutures.add(doc.reference.delete());
+      }
+
+      await Future.wait(deleteFutures);
+      print("All products in category $categoryDocId deleted successfully");
+    } catch (error) {
+      print("Error deleting products: $error");
+      // Handle error according to your app's requirements
     }
   }
 
