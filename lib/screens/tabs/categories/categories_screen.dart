@@ -154,7 +154,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                               context
                                                   .read<CategoriesViewModel>()
                                                   .deleteCategory(
-                                                    list[index].docId,
+                                                    list[index],
                                                     context,
                                                   );
                                               if (!context.mounted) return;

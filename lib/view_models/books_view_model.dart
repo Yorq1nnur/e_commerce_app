@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/data/models/book_model.dart';
 import 'package:e_commerce_app/utils/constants/app_constants.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../utils/utility_functions.dart';
@@ -69,13 +70,34 @@ class BooksViewModel extends ChangeNotifier {
     }
   }
 
-  deleteProduct(String docId, BuildContext context) async {
+  Future<void> deleteProduct(String docId, BuildContext context) async {
     try {
       _notify(true);
-      await FirebaseFirestore.instance
-          .collection(AppConstants.books)
-          .doc(docId)
-          .delete();
+
+      // Get the document reference
+      final DocumentReference<Map<String, dynamic>> docRef =
+      FirebaseFirestore.instance.collection(AppConstants.books).doc(docId);
+
+      // Get the document data
+      final DocumentSnapshot<Map<String, dynamic>> docSnapshot =
+      await docRef.get();
+
+      // Get the imageUrl field from the document data
+      final String? imageUrl = docSnapshot.data()?['image_url'];
+
+      // Delete the document from Firestore
+      await docRef.delete();
+
+      // If imageUrl exists, delete the corresponding image from Firebase Storage
+      if (imageUrl != null) {
+        // Extracting the image name from the URL
+        final imageName = imageUrl.split('/').last;
+        final Reference storageReference =
+        FirebaseStorage.instance.ref().child('images/$imageName');
+
+        // Deleting the image from Firebase Storage
+        await storageReference.delete();
+      }
 
       _notify(false);
     } on FirebaseException catch (error) {
@@ -86,6 +108,7 @@ class BooksViewModel extends ChangeNotifier {
       );
     }
   }
+
 
   _notify(bool v) {
     _isLoading = v;
