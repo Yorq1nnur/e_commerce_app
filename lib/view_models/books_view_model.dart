@@ -3,7 +3,6 @@ import 'package:e_commerce_app/data/models/book_model.dart';
 import 'package:e_commerce_app/utils/constants/app_constants.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../utils/utility_functions.dart';
 
 class BooksViewModel extends ChangeNotifier {
