@@ -28,6 +28,8 @@ class _BooksScreenState extends State<BooksScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.sizeOf(context).width;
+    double h = MediaQuery.sizeOf(context).height;
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -37,6 +39,7 @@ class _BooksScreenState extends State<BooksScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          scrolledUnderElevation: 0,
           elevation: 0,
           centerTitle: true,
           backgroundColor: Colors.white,
@@ -161,7 +164,7 @@ class _BooksScreenState extends State<BooksScreen> {
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
                             crossAxisCount: 2,
-                            childAspectRatio: 0.5,
+                            childAspectRatio: w / h,
                             children: [
                               ...List.generate(
                                 list.length,
@@ -193,7 +196,7 @@ class _BooksScreenState extends State<BooksScreen> {
                                         },
                                         child: CachedNetworkImage(
                                           imageUrl: list[index].imageUrl,
-                                          height: 200.h,
+                                          height: h / 3,
                                           width: double.infinity,
                                           fit: BoxFit.cover,
                                         ),
@@ -356,7 +359,7 @@ class _BooksScreenState extends State<BooksScreen> {
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
                             crossAxisCount: 2,
-                            childAspectRatio: 0.5,
+                            childAspectRatio: w / h,
                             children: [
                               ...List.generate(
                                 list.length,
@@ -388,7 +391,7 @@ class _BooksScreenState extends State<BooksScreen> {
                                         },
                                         child: CachedNetworkImage(
                                           imageUrl: list[index].imageUrl,
-                                          height: 200.h,
+                                          height: h / 3,
                                           width: double.infinity,
                                           fit: BoxFit.cover,
                                         ),

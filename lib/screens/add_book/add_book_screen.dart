@@ -42,6 +42,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
   }
 
   String categoryDocId = '';
+  String categoryName = '';
   int activeIndex = -1;
   String fcmToken = "";
   final ImagePicker picker = ImagePicker();
@@ -454,6 +455,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                                         debugPrint(
                                             "\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
                                         categoryDocId = list[index].docId;
+                                        categoryName = list[index].categoryName;
                                         debugPrint(categoryDocId);
                                         setState(() {
                                           activeIndex = index;
@@ -484,7 +486,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                       bookNameController.text != '' &&
                       categoryDocId != '' &&
                       rateController.text != '' &&
-                      bookAuthorController.text != '') {
+                      bookAuthorController.text != '' &&
+                      categoryName != '') {
                     BookModel category = BookModel(
                       price: double.parse(priceController.text),
                       imageUrl: imageUrl,
