@@ -61,4 +61,27 @@ class BookModel {
       "book_author": bookAuthor
     };
   }
+
+  BookModel copwWith({
+    String? docId,
+    String? bookName,
+    String? bookAuthor,
+    String? rate,
+    String? bookDescription,
+    double? price,
+    String? imageUrl,
+    String? categoryId,
+    String? categoryName,
+  }) =>
+      BookModel(
+        price: price ?? this.price,
+        imageUrl: imageUrl ?? this.imageUrl,
+        bookName: bookName ?? this.bookName,
+        docId: docId ?? this.docId,
+        bookDescription: bookDescription ?? this.bookDescription,
+        categoryId: categoryId ?? this.categoryId,
+        categoryName: categoryName ?? this.categoryName,
+        rate: rate ?? this.rate,
+        bookAuthor: bookAuthor ?? this.bookAuthor,
+      );
 }

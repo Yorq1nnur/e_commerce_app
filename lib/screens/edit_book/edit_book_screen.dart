@@ -397,18 +397,20 @@ class _EditBookScreenState extends State<EditBookScreen> {
                           ...List.generate(
                             list.length,
                             (index) => CategoryButton(
-                                title: list[index].categoryName,
-                                onTap: () {
-                                  categoryName = list[index].categoryName;
-                                  debugPrint(
-                                      "\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
-                                  categoryDocId = list[index].docId;
-                                  debugPrint(categoryDocId);
-                                  setState(() {
-                                    activeIndex = index;
-                                  });
-                                },
-                                isActive: activeIndex == index),
+                              title: list[index].categoryName,
+                              onTap: () {
+                                categoryName = list[index].categoryName;
+                                debugPrint(
+                                    "\$\$\$\$\$\$\$\$\$========\n$activeIndex\n========\$\$\$\$\$\$\$\$\$");
+                                categoryDocId = list[index].docId;
+                                categoryName = list[index].categoryName;
+                                debugPrint(categoryDocId);
+                                setState(() {
+                                  activeIndex = index;
+                                });
+                              },
+                              isActive: activeIndex == index,
+                            ),
                           )
                         ],
                       ));
@@ -423,7 +425,7 @@ class _EditBookScreenState extends State<EditBookScreen> {
             ),
             ZoomTapAnimation(
               onTap: () async {
-                BookModel category = BookModel(
+               BookModel bookModel = widget.bookModel.copwWith(
                   imageUrl:
                       imageUrl == "" ? widget.bookModel.imageUrl : imageUrl,
                   rate: rate == "" ? widget.bookModel.rate : rate,
@@ -448,7 +450,10 @@ class _EditBookScreenState extends State<EditBookScreen> {
                 );
                 await context
                     .read<BooksViewModel>()
-                    .updateProduct(category, context);
+                    .updateProduct(bookModel, context);
+                debugPrint(
+                  "\$\$\$\$\$ UPDATED CATEGORY NAME IS: ${bookModel.categoryName}\$\$\$\$\$",
+                );
                 if (!context.mounted) return;
                 context.read<NotificationsViewModel>().showNotifications(
                       title: "$bookName NOMLI BOOK TAHRIRLANDI!!!",
