@@ -75,11 +75,11 @@ class BooksViewModel extends ChangeNotifier {
 
       // Get the document reference
       final DocumentReference<Map<String, dynamic>> docRef =
-      FirebaseFirestore.instance.collection(AppConstants.books).doc(docId);
+          FirebaseFirestore.instance.collection(AppConstants.books).doc(docId);
 
       // Get the document data
       final DocumentSnapshot<Map<String, dynamic>> docSnapshot =
-      await docRef.get();
+          await docRef.get();
 
       // Get the imageUrl field from the document data
       final String? imageUrl = docSnapshot.data()?['image_url'];
@@ -92,7 +92,7 @@ class BooksViewModel extends ChangeNotifier {
         // Extracting the image name from the URL
         final imageName = imageUrl.split('/').last;
         final Reference storageReference =
-        FirebaseStorage.instance.ref().child('images/$imageName');
+            FirebaseStorage.instance.ref().child('images/$imageName');
 
         // Deleting the image from Firebase Storage
         await storageReference.delete();
@@ -107,7 +107,6 @@ class BooksViewModel extends ChangeNotifier {
       );
     }
   }
-
 
   _notify(bool v) {
     _isLoading = v;

@@ -1,5 +1,6 @@
 class BookModel {
   final String docId;
+  final String dateTime;
   final String bookName;
   final String bookAuthor;
   final String rate;
@@ -19,6 +20,7 @@ class BookModel {
     required this.categoryName,
     required this.rate,
     required this.bookAuthor,
+    required this.dateTime,
   });
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,7 @@ class BookModel {
       price: json["price"] as double? ?? 0.0,
       rate: json["rate"] as String? ?? "",
       bookAuthor: json["book_author"] as String? ?? "",
+      dateTime: json["date_time"] as String? ?? "",
     );
   }
 
@@ -62,7 +65,7 @@ class BookModel {
     };
   }
 
-  BookModel copwWith({
+  BookModel copyWith({
     String? docId,
     String? bookName,
     String? bookAuthor,
@@ -72,9 +75,11 @@ class BookModel {
     String? imageUrl,
     String? categoryId,
     String? categoryName,
+    String? dateTime,
   }) =>
       BookModel(
         price: price ?? this.price,
+        dateTime: dateTime ?? this.dateTime,
         imageUrl: imageUrl ?? this.imageUrl,
         bookName: bookName ?? this.bookName,
         docId: docId ?? this.docId,

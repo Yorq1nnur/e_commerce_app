@@ -89,6 +89,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
     super.initState();
   }
 
+  String category = '';
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -459,6 +461,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                                         debugPrint(categoryDocId);
                                         setState(() {
                                           activeIndex = index;
+                                          category = list[index].categoryName;
                                         });
                                       },
                                       isActive: activeIndex == index,
@@ -488,7 +491,8 @@ class _AddBookScreenState extends State<AddBookScreen> {
                       rateController.text != '' &&
                       bookAuthorController.text != '' &&
                       categoryName != '') {
-                    BookModel category = BookModel(
+                    BookModel book = BookModel(
+                      dateTime: DateTime.now().toString(),
                       price: double.parse(priceController.text),
                       imageUrl: imageUrl,
                       rate: rateController.text,
@@ -497,7 +501,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                       docId: "",
                       bookDescription: bookDescriptionController.text,
                       categoryId: categoryDocId,
-                      categoryName: '',
+                      categoryName: category,
                     );
                     String messageId =
                         await ApiProvider().sendNotificationToUsers(
@@ -517,7 +521,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                     if (!context.mounted) return;
                     await context
                         .read<BooksViewModel>()
-                        .insertProducts(category, context);
+                        .insertProducts(book, context);
                     if (!context.mounted) return;
                     Navigator.pop(context);
                     if (!context.mounted) return;

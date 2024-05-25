@@ -73,12 +73,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
               crossAxisCount: 2,
-              childAspectRatio: w/h,
+              childAspectRatio: w / h,
               children: [
                 ...List.generate(
                   list.length,
                   (index) => InkWell(
-                    borderRadius: BorderRadius.circular(20.r,),
+                    borderRadius: BorderRadius.circular(
+                      20.r,
+                    ),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -114,7 +116,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                             ),
                             child: CachedNetworkImage(
                               imageUrl: list[index].imageUrl,
-                              height: h/3,
+                              height: h / 3,
                               width: double.infinity,
                               fit: BoxFit.cover,
                             ),

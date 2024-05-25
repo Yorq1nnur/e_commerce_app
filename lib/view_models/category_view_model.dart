@@ -114,7 +114,8 @@ class CategoriesViewModel extends ChangeNotifier {
       }
 
       await Future.wait(deleteFutures);
-      debugPrint("All products in category $categoryDocId deleted successfully");
+      debugPrint(
+          "All products in category $categoryDocId deleted successfully");
     } catch (error) {
       debugPrint("Error deleting products: $error");
     }

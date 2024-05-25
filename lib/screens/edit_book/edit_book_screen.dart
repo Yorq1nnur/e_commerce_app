@@ -425,7 +425,7 @@ class _EditBookScreenState extends State<EditBookScreen> {
             ),
             ZoomTapAnimation(
               onTap: () async {
-               BookModel bookModel = widget.bookModel.copwWith(
+                BookModel bookModel = widget.bookModel.copyWith(
                   imageUrl:
                       imageUrl == "" ? widget.bookModel.imageUrl : imageUrl,
                   rate: rate == "" ? widget.bookModel.rate : rate,

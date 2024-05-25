@@ -251,9 +251,7 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
               pickedFile: image,
               storagePath: storagePath,
             ))!;
-        setState(() {
-
-        });
+        setState(() {});
       }
       debugPrint("DOWNLOAD URL:$imageUrl");
     }
@@ -273,9 +271,7 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
               pickedFile: image,
               storagePath: storagePath,
             ))!;
-        setState(() {
-
-        });
+        setState(() {});
       }
       debugPrint("DOWNLOAD URL:$imageUrl");
     }
