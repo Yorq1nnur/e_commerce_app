@@ -1,8 +1,6 @@
 import 'package:e_commerce_app/utils/images/app_images.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
 import '../routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,12 +17,9 @@ class _SplashScreenState extends State<SplashScreen> {
     );
     if (!mounted) return;
 
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      Navigator.pushReplacementNamed(context, RouteNames.loginRoute);
-    } else {
+
       Navigator.pushReplacementNamed(context, RouteNames.tabRoute);
-    }
+
   }
 
   @override
