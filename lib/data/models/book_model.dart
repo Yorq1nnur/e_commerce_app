@@ -48,7 +48,8 @@ class BookModel {
       "category_id": categoryId,
       "category_name": categoryName,
       "rate": rate,
-      "book_author": bookAuthor
+      "book_author": bookAuthor,
+      "date_time": dateTime
     };
   }
 
@@ -61,7 +62,8 @@ class BookModel {
       "price": price,
       "category_id": categoryId,
       "rate": rate,
-      "book_author": bookAuthor
+      "book_author": bookAuthor,
+      "date_time": dateTime
     };
   }
 
