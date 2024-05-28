@@ -23,49 +23,43 @@ class BookModel {
     required this.dateTime,
   });
 
-  factory BookModel.fromJson(Map<String, dynamic> json) {
-    return BookModel(
-      docId: json["doc_id"] as String? ?? "",
-      imageUrl: json["image_url"] as String? ?? "",
-      categoryId: json["category_id"] as String? ?? "",
-      categoryName: json["category_name"] as String? ?? "",
-      bookName: json["product_name"] as String? ?? "",
-      bookDescription: json["product_description"] as String? ?? "",
-      price: json["price"] as double? ?? 0.0,
-      rate: json["rate"] as String? ?? "",
-      bookAuthor: json["book_author"] as String? ?? "",
-      dateTime: json["date_time"] as String? ?? "",
-    );
-  }
+  factory BookModel.fromJson(Map<String, dynamic> json) =>BookModel(
+    docId: json["doc_id"] as String? ?? "",
+    imageUrl: json["image_url"] as String? ?? "",
+    categoryId: json["category_id"] as String? ?? "",
+    categoryName: json["category_name"] as String? ?? "",
+    bookName: json["product_name"] as String? ?? "",
+    bookDescription: json["product_description"] as String? ?? "",
+    price: json["price"] as double? ?? 0.0,
+    rate: json["rate"] as String? ?? "",
+    bookAuthor: json["book_author"] as String? ?? "",
+    dateTime: json["date_time"] as String? ?? "",
+  );
 
-  Map<String, dynamic> toJson() {
-    return {
-      "doc_id": "",
-      "image_url": imageUrl,
-      "product_name": bookName,
-      "product_description": bookDescription,
-      "price": price,
-      "category_id": categoryId,
-      "category_name": categoryName,
-      "rate": rate,
-      "book_author": bookAuthor,
-      "date_time": dateTime
-    };
-  }
+  Map<String, dynamic> toJson() =>{
+    "doc_id": "",
+    "image_url": imageUrl,
+    "product_name": bookName,
+    "product_description": bookDescription,
+    "price": price,
+    "category_id": categoryId,
+    "category_name": categoryName,
+    "rate": rate,
+    "book_author": bookAuthor,
+    "date_time": dateTime
+  };
 
-  Map<String, dynamic> toJsonForUpdate() {
-    return {
-      "image_url": imageUrl,
-      "product_name": bookName,
-      "category_name": categoryName,
-      "product_description": bookDescription,
-      "price": price,
-      "category_id": categoryId,
-      "rate": rate,
-      "book_author": bookAuthor,
-      "date_time": dateTime
-    };
-  }
+  Map<String, dynamic> toJsonForUpdate() =>{
+    "image_url": imageUrl,
+    "product_name": bookName,
+    "category_name": categoryName,
+    "product_description": bookDescription,
+    "price": price,
+    "category_id": categoryId,
+    "rate": rate,
+    "book_author": bookAuthor,
+    "date_time": dateTime
+  };
 
   BookModel copyWith({
     String? docId,
