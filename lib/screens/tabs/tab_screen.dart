@@ -25,6 +25,7 @@ class _TabScreenState extends State<TabScreen> {
     return Scaffold(
       body: screens[context.watch<TabViewModel>().getIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.grey,
         currentIndex: context.watch<TabViewModel>().getIndex,
         onTap: (newIndex) {
           context.read<TabViewModel>().changeIndex(newIndex);
