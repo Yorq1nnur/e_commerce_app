@@ -34,7 +34,8 @@ class ImageViewModel extends ChangeNotifier {
     return imageUrl;
   }
 
-  Future<String?> uploadImage({required XFile pickedFile, required String storagePath}) async {
+  Future<String?> uploadImage(
+      {required XFile pickedFile, required String storagePath}) async {
     try {
       //1
 

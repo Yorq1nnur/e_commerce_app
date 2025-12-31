@@ -35,6 +35,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: ZoomTapAnimation(
             onTap: () {

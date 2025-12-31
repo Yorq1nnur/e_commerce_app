@@ -22,7 +22,10 @@ class CategoriesScreen extends StatefulWidget {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.sizeOf(context).width;
+    double h = MediaQuery.sizeOf(context).height;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColors.white,
@@ -70,11 +73,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
               crossAxisCount: 2,
-              childAspectRatio: 0.5,
+              childAspectRatio: w / h,
               children: [
                 ...List.generate(
                   list.length,
                   (index) => InkWell(
+                    borderRadius: BorderRadius.circular(
+                      20.r,
+                    ),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -88,6 +94,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          20.r,
+                        ),
                         border: Border.all(
                           color: AppColors.black,
                           width: 2.w,
@@ -96,11 +105,21 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          CachedNetworkImage(
-                            imageUrl: list[index].imageUrl,
-                            height: 200.h,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(
+                                20.r,
+                              ),
+                              topRight: Radius.circular(
+                                20.r,
+                              ),
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl: list[index].imageUrl,
+                              height: h / 3,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           SizedBox(
                             height: 10.h,
@@ -153,7 +172,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                               context
                                                   .read<CategoriesViewModel>()
                                                   .deleteCategory(
-                                                    list[index].docId,
+                                                    list[index],
                                                     context,
                                                   );
                                               if (!context.mounted) return;

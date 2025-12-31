@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import '../data/models/category_model.dart';
 import '../utils/constants/app_constants.dart';
@@ -80,14 +81,14 @@ class CategoriesViewModel extends ChangeNotifier {
     }
   }
 
-  deleteCategory(String docId, BuildContext context) async {
+  deleteCategory(CategoryModel categoryModel, BuildContext context) async {
     try {
       _notify(true);
       await FirebaseFirestore.instance
           .collection(AppConstants.categories)
-          .doc(docId)
+          .doc(categoryModel.docId)
           .delete();
-
+      FirebaseStorage.instance.ref().child(categoryModel.imageUrl).delete();
       _notify(false);
     } on FirebaseException catch (error) {
       if (!context.mounted) return;
@@ -95,6 +96,28 @@ class CategoriesViewModel extends ChangeNotifier {
         context: context,
         message: error.code,
       );
+    }
+  }
+
+  Future<void> deleteProductsByCategory({required String categoryDocId}) async {
+    try {
+      final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await FirebaseFirestore.instance
+              .collection(AppConstants.books)
+              .where("category_id", isEqualTo: categoryDocId)
+              .get();
+
+      final List<Future<void>> deleteFutures = [];
+
+      for (final doc in querySnapshot.docs) {
+        deleteFutures.add(doc.reference.delete());
+      }
+
+      await Future.wait(deleteFutures);
+      debugPrint(
+          "All products in category $categoryDocId deleted successfully");
+    } catch (error) {
+      debugPrint("Error deleting products: $error");
     }
   }
 

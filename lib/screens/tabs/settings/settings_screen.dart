@@ -29,6 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -149,59 +150,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               SizedBox(
                 height: 10.h,
-              ),
-              InkWell(
-                borderRadius: BorderRadius.circular(
-                  16.r,
-                ),
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    RouteNames.permissionsRoute,
-                  );
-                },
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.only(
-                    top: 20.h,
-                    left: 20.w,
-                    bottom: 20.h,
-                    right: 30.w,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.cCA5A5A.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(
-                      16.r,
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.settings_backup_restore,
-                            size: 20.w,
-                          ),
-                          SizedBox(
-                            width: 15.w,
-                          ),
-                          Text(
-                            "Permissions",
-                            style: AppTextStyle.interBold
-                                .copyWith(color: Colors.lightGreen),
-                          ),
-                          const Spacer(),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 20.h,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
               ),
               const Spacer(),
               Center(

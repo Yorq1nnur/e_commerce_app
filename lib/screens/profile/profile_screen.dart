@@ -29,6 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
             "Profile",
